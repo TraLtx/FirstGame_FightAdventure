@@ -25,6 +25,8 @@ public class PlayerCtrl : GameMonoBehaviour
     [SerializeField] protected Transform shootingPoint;
     public Transform ShootingPoint => this.shootingPoint;
 
+    [SerializeField] protected PlayerDangerEffect playerDangerEffect;
+    public PlayerDangerEffect PlayerDangerEffect => this.playerDangerEffect;
 
     protected override void LoadComponents(){
         base.LoadComponents();
@@ -34,6 +36,7 @@ public class PlayerCtrl : GameMonoBehaviour
         this.LoadPhotonView();
         this.LoadGroundCheck();
         this.LoadShootingPoint();
+        this.LoadPlayerDangerEffect();
     }
 
     protected virtual void LoadSpriteRenderer(){
@@ -67,8 +70,17 @@ public class PlayerCtrl : GameMonoBehaviour
         this.groundCheck = transform.Find("GroundCheck");
     }
 
+    protected virtual void LoadPlayerDangerEffect(){
+        if(this.playerDangerEffect != null) return;
+        this.playerDangerEffect = transform.GetComponentInChildren<PlayerDangerEffect>();
+    }
+
     //-----------------------------------------
     protected virtual void Update(){
     }
+    //----------------------------------------
+    // public virtual void OnDanger(){
+
+    // }
 
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
 {
+    public override void Deduct(int subNum){
+        base.Deduct(subNum);
+        // Debug.Log(transform.parent.name);
+        transform.parent.GetComponent<PlayerCtrl>().PlayerDangerEffect.NotifyDanger();
+    }
     protected override void OnDead(){
         Destroy(transform.parent.gameObject);
         GameController.Instance.ShowDieMenu();
