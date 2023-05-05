@@ -64,20 +64,29 @@ public class MainMenuManager : GameMonoBehaviour
         this.pnlChooseChar.gameObject.SetActive(true);
     }
 
+    public virtual void BtnExitPnlChooseCharClick(){
+        this.pnlChooseChar.gameObject.SetActive(false);
+    }
+
     public virtual void BtnGreenCharClick(){
         this.bgChooseYellow.gameObject.SetActive(false);
         this.bgChooseGreen.gameObject.SetActive(true);
+        this.charIndex = 1;
     }
 
     public virtual void BtnYellowCharClick(){ 
         this.bgChooseGreen.gameObject.SetActive(false);
         this.bgChooseYellow.gameObject.SetActive(true);
+        this.charIndex = 2;
     }
 
     public virtual void BtnChooseCharOkClick(){
         if(this.charIndex == 0){
             SystemNotify.Instance.ShowNotify("Choose your character!");
+            return;
         }
+        PlayerPrefs.SetInt("CharacterIndex", this.charIndex);
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene();
     }
 
     public virtual void LoadNextScene(){

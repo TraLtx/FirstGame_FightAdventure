@@ -15,6 +15,8 @@ public class EnemyCtrl : GameMonoBehaviour
     [SerializeField] protected Transform enemyViewRange;
     public Transform EnemyViewRange => this.enemyViewRange;
 
+    [SerializeField] protected Transform animation;
+
     //---Variable-------------------------------------------------------------------
     [SerializeField] protected Transform thisSpawnPoint;
     public Transform ThisSpawnPoint => this.thisSpawnPoint;
@@ -25,12 +27,16 @@ public class EnemyCtrl : GameMonoBehaviour
     [SerializeField] protected bool isTouchEnemy = false;
     public bool IsTouchEnemy {set => this.isTouchEnemy = value; get => this.isTouchEnemy;}
 
+    [SerializeField] protected bool isDie = false;
+    public bool IsDie {get => this.isDie;}
+
     //------------------Load Components--------------------
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadRigidbody();
         this.LoadEnemyShootingPoint();
         this.LoadEnemyViewRange();
+        this.LoadAnimation();
     }
 
     protected virtual void LoadRigidbody(){
@@ -50,9 +56,20 @@ public class EnemyCtrl : GameMonoBehaviour
 
         this.enemyViewRange = transform.Find("ViewRange");
     }
+
+    protected virtual void LoadAnimation(){
+        if(this.animation != null) return;
+        this.animation = transform.Find("EnemyAnimation");
+    }
     //-----------------------------------------------------
 
     public virtual void SetThisSpawnPoint(Transform spawnPoint){
         this.thisSpawnPoint = spawnPoint;
+    }
+
+    public virtual void Die(){
+        this.isDie = true;
+        this.animation.GetComponent<EnemyAnimation>().TurnOnDieAnimation();
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }

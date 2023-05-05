@@ -131,6 +131,12 @@ public class GameController : GameMonoBehaviour
 
         PlayerSpawner playerSpawner = PlayerSpawner.Instance;
         thisPlayer = playerSpawner.Spawn(PlayerSpawner.player, PlayerSpawner.spawnPointServer);
+        if(PlayerPrefs.GetInt("CharacterIndex") == 1){
+            thisPlayer.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Box_Char_Green");
+        }else if(PlayerPrefs.GetInt("CharacterIndex") == 1){
+            thisPlayer.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Box_Char_Yellow");
+        }
+        
         // thisPlayer.gameObject.SetActive(true);
 
         

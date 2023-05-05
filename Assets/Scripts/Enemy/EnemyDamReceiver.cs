@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyDamReceiver : DamReceiver//, IHpBarInterface
 {
     protected override void OnDead(){
-        Destroy(transform.parent.gameObject);
+        // Destroy(transform.parent.gameObject);
+        transform.parent.GetComponent<EnemyCtrl>().Die();
     }
     protected override void LoadHpBar(){
         if(this.hpBar != null) return;

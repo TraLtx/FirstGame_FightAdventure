@@ -10,7 +10,7 @@ public class EnemyShooting : EnemyAbstract
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(!enemyCtrl.IsSeePlayer) return;
+        if(!enemyCtrl.IsSeePlayer || enemyCtrl.IsDie) return;
 
         this.Shoot();
     }

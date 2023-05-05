@@ -16,6 +16,7 @@ public class EnemyMovement : EnemyAbstract
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+        if(enemyCtrl.IsDie) return;
         if(enemyCtrl.IsTouchEnemy){//Debug.Log("TouchEnemey TurnBack");
             this.canTurn = true;
             this.Redirect();
