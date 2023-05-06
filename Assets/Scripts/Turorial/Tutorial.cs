@@ -19,10 +19,11 @@ public abstract class Tutorial : GameMonoBehaviour
         this.SetTutorialContent();
         this.SetShowTime();
         this.isDone = false;
+        // transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     protected virtual void LoadCollider(){
-        if(this._collider != null) return;
+        // if(this._collider != null) return;
         this._collider = GetComponent<Collider2D>();
         this._collider.isTrigger = true;
     }

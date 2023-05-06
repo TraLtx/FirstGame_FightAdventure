@@ -6,7 +6,7 @@ using Photon.Pun;
 public class PlayerMovement : PlayerAbstract
 {
     [SerializeField] protected float speed = 8f;
-    [SerializeField] protected float jumpingPower = 17f;
+    [SerializeField] protected float jumpingPower = 16f;
     [SerializeField] protected float horizontalMove;
     [SerializeField] protected bool isFacingRight = true;
     [SerializeField] protected bool isStop = true;
@@ -43,7 +43,7 @@ public class PlayerMovement : PlayerAbstract
         this.SetMoveRange(GameController.screenMinPoint, GameController.screenMaxPoint);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(GameController.Instance.IsOnlineState && !playerCtrl.View.IsMine) return;
 

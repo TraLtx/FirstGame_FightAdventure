@@ -21,6 +21,6 @@ public class EnemyAnimation : EnemyAbstract
     }
 
     public virtual void DieAnimationDone(){
-        Destroy(transform.parent.gameObject);
+        Destroy(transform.gameObject);
     }
 }
