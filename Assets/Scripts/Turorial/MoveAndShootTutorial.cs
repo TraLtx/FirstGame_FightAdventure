@@ -9,6 +9,6 @@ public class MoveAndShootTutorial : Tutorial
     }
 
     protected override void SetShowTime(){
-        this.showTime = 5;
+        this.showTime = 6;
     }
 }

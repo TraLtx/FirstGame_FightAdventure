@@ -11,6 +11,9 @@ public class GameController : GameMonoBehaviour
     public static GameController Instance {get => instance;}
 
     //---Game Object-------------------------------------------------------------
+    [SerializeField] protected Camera camera;
+    [SerializeField] protected Transform sceneChanger;
+
     [SerializeField] protected Transform playerPrefab;
     [SerializeField] protected Transform enemyPrefab;
 
@@ -21,11 +24,13 @@ public class GameController : GameMonoBehaviour
     [SerializeField] protected Transform pnlYouDie;
     public Transform PnlYouDie => this.pnlYouDie;
 
-    [SerializeField] protected Camera camera;
+    [SerializeField] protected PausePanel pnlPause;
 
 
     // [SerializeField] protected GameObject playerServerPrefab;
     // [SerializeField] protected GameObject playerClientPrefab;
+
+    //---Variable--------------------------------------------------------------
 
     [SerializeField] protected Transform thisPlayer;
     public Transform ThisPlayer => this.thisPlayer;
@@ -56,8 +61,10 @@ public class GameController : GameMonoBehaviour
         base.LoadComponents();
         this.LoadTileBackGround();
         this.LoadPnlYouDie();
+        this.LoadPnlPause();
         this.LoadScreenRange();
         this.LoadCamera();
+        this.LoadSceneChanger();
         // this.LoadPlayerSpawnerPoints();
     }
 
@@ -71,6 +78,11 @@ public class GameController : GameMonoBehaviour
     protected virtual void LoadPnlYouDie(){
         if(this.pnlYouDie != null) return;
         this.pnlYouDie = GameObject.Find("MainCanvas").transform.Find("Pnl_YouDie");
+    }
+
+    protected virtual void LoadPnlPause(){
+        if(this.pnlPause != null) return;
+        this.pnlPause = GameObject.Find("MainCanvas").transform.Find("Pnl_Pause").GetComponent<PausePanel>();
     }
 
     protected virtual void LoadScreenRange(){
@@ -98,6 +110,11 @@ public class GameController : GameMonoBehaviour
 
     protected virtual void LoadCamera(){
         this.camera = Transform.FindObjectOfType<Camera>();
+    }
+
+    protected virtual void LoadSceneChanger(){
+        if(this.sceneChanger != null) return;
+        this.sceneChanger = GameObject.Find("SceneChanger").transform;
     }
 
     // protected virtual void LoadPlayerSpawnerPoints(){
@@ -150,6 +167,7 @@ public class GameController : GameMonoBehaviour
     protected virtual void SpawnObject(){
         BoxGunSpawner.Instance.SpawnBoxGunAllPoints(); 
         BoxHeartSpawner.Instance.SpawnBoxHeartAllPoints();
+        BoxPowerSpawner.Instance.SpawnBoxPowerAllPoints();
     }
 
     public virtual void ShowDieMenu(){
@@ -157,7 +175,23 @@ public class GameController : GameMonoBehaviour
     }
 
     public virtual void RestartGame(){
-        SceneManager.LoadScene("MainPlay");
+        Time.timeScale = 1;
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene("MainPlay");
+        // SceneManager.LoadScene("MainPlay");
+    }
+
+    public virtual void BtnPauseClick(){
+        this.PauseGame();
+    }
+
+    protected virtual void PauseGame(){
+        Time.timeScale = 0;
+        this.pnlPause.Show();
+    }
+
+    public virtual void ContinueGame(){
+        Time.timeScale = 1;
+        this.pnlPause.Hide();
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");

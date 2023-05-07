@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : GameMonoBehaviour
 {
     [SerializeField] protected Animator animator;
+    [SerializeField] protected string nextSceneName;
 
     protected override void LoadComponents(){
         this.LoadAnimator();
@@ -15,11 +17,13 @@ public class SceneChanger : GameMonoBehaviour
         this.animator = GetComponent<Animator>();
     }
 
-    public virtual void ChangeScene(){
+    public virtual void ChangeScene(string nextSceneName){
+        this.nextSceneName = nextSceneName;
         animator.SetTrigger("FadeIn");
     }
 
     public virtual void OnFadeInDone(){
-        MainMenuManager.Instance.LoadNextScene();
+        // MainMenuManager.Instance.LoadNextScene();
+        SceneManager.LoadScene(nextSceneName);
     }
 }

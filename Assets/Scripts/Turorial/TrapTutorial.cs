@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunBoxTutorial : Tutorial
+public class TrapTutorial : Tutorial
 {
     protected override void SetTutorialContent(){
-        this.tutorialContent = "Gun box, upgrade your gun, more damage!";
+        this.tutorialContent = "Becareful with trap below!";
     }
 }

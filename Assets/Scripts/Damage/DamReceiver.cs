@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class DamReceiver : GameMonoBehaviour
 {
     [Header("Damage Receiver")]
-    [SerializeField] protected int maxHp = 10;
-    [SerializeField] protected int hp = 10;
+    [SerializeField] protected int maxHp;
+    [SerializeField] protected int hp;
     [SerializeField] protected bool isDead = false;
     [SerializeField] protected UIHpBar hpBar;
 
@@ -16,8 +16,7 @@ public abstract class DamReceiver : GameMonoBehaviour
     }
 
     protected override void ResetValue(){
-        this.hp = this.maxHp;
-        this.isDead = false;
+        this.SetHp();
     }
 
     protected virtual void UpdateHpBar(){
@@ -56,6 +55,7 @@ public abstract class DamReceiver : GameMonoBehaviour
 
     protected abstract void OnDead();
     protected abstract void LoadHpBar();
+    protected abstract void SetHp();
 
     // protected virtual bool CheckIsDead(){
     //     if(this.hp == 0) return true;

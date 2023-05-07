@@ -13,7 +13,8 @@ public class EnemyDamReceiver : DamReceiver//, IHpBarInterface
         this.hpBar = transform.parent.GetComponentInChildren<UIHpBar>();
     }
 
-    // public int HP(){
-    //     return (this.hp/this.maxHp)*100;
-    // }
+    protected override void SetHp(){
+        this.maxHp = 4;
+        this.hp = maxHp;
+    }
 }

@@ -86,12 +86,12 @@ public class MainMenuManager : GameMonoBehaviour
             return;
         }
         PlayerPrefs.SetInt("CharacterIndex", this.charIndex);
-        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene();
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }
 
-    public virtual void LoadNextScene(){
-        SceneManager.LoadScene("MainPlay");
-    }
+    // public virtual void LoadNextScene(){
+    //     SceneManager.LoadScene("MainPlay");
+    // }
 
     public virtual void TurnOnSceneChanger(){
         this.sceneChanger.gameObject.SetActive(true);
