@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxGunSpawner : Spawner
+public class BoxGunSpawner : SpawnerNormal
 {
     private static BoxGunSpawner instance;
     public static BoxGunSpawner Instance {get => instance;}

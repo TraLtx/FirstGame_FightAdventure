@@ -22,5 +22,7 @@ public class EnemyAnimation : EnemyAbstract
 
     public virtual void DieAnimationDone(){
         Destroy(transform.gameObject);
+        Transform newCoin = CoinSpawner.Instance.Spawn(CoinSpawner.silverCoin, transform.position, transform.rotation);
+        newCoin.gameObject.SetActive(true);
     }
 }

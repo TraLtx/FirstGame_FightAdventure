@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerSpawner : Spawner
+public class PlayerSpawner : SpawnerNormal
 {
     private static PlayerSpawner instance;
     public static PlayerSpawner Instance {get => instance;}

@@ -3,42 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public abstract class SpawnerWithPool : GameMonoBehaviour
+public abstract class SpawnerWithPool : Spawner
 {
-    [SerializeField] protected List<Transform> prefabs;
     [SerializeField] protected List<Transform> poolObjs;
-    [SerializeField] protected Transform holder;
 
     protected override void LoadComponents(){
-        this.LoadHolder();
-        this.LoadPrefabs();
-    }
-
-    protected virtual void LoadHolder(){
-        if(this.holder != null) return;
-
-        this.holder = transform.Find("Holder");
-    }
-
-    protected virtual void LoadPrefabs()
-    {
-        if(prefabs.Count > 0) return;
-
-        Transform prefabsObject = transform.Find("Prefabs");
-        Debug.Log("LoadPrefabs: "+prefabsObject);
-        foreach (Transform prefab in prefabsObject)
-        {
-            prefabs.Add(prefab);
-        }
-
-        this.HidePrefabs();
-    }
-
-    protected virtual void HidePrefabs(){
-        foreach (Transform prefab in prefabs)
-        {
-            prefab.gameObject.SetActive(false);
-        }
+        base.LoadComponents();
     }
 
     public Transform Spawn(string prefabName, Vector3 position, Quaternion rotation)
@@ -53,17 +23,6 @@ public abstract class SpawnerWithPool : GameMonoBehaviour
         newPrefab.SetPositionAndRotation(position, rotation);
 
         return newPrefab;
-    }
-
-    public virtual Transform GetPrefabByName(string prefabName)
-    {
-        foreach(Transform prefab in prefabs){
-            if(prefabName == prefab.name){
-                return prefab;
-            }
-        }
-
-        return null;
     }
 
     protected virtual Transform GetObjectFromPool(Transform prefab){

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxHeartSpawner : Spawner
+public class BoxHeartSpawner : SpawnerNormal
 {
     private static BoxHeartSpawner instance;
     public static BoxHeartSpawner Instance {get => instance;}

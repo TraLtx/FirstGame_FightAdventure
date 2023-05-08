@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxPowerSpawner : Spawner
+public class BoxPowerSpawner : SpawnerNormal
 {
     private static BoxPowerSpawner instance;
     public static BoxPowerSpawner Instance {get => instance;}
