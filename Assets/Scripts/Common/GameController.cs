@@ -76,13 +76,15 @@ public class GameController : GameMonoBehaviour
     }
 
     protected virtual void LoadPnlYouDie(){
-        if(this.pnlYouDie != null) return;
+        // if(this.pnlYouDie != null) return;
         this.pnlYouDie = GameObject.Find("MainCanvas").transform.Find("Pnl_YouDie");
+        this.pnlYouDie.gameObject.SetActive(false);
     }
 
     protected virtual void LoadPnlPause(){
         if(this.pnlPause != null) return;
         this.pnlPause = GameObject.Find("MainCanvas").transform.Find("Pnl_Pause").GetComponent<PausePanel>();
+        // this.pnlPause.gameObject.SetActive(false);
     }
 
     protected virtual void LoadScreenRange(){
@@ -176,7 +178,8 @@ public class GameController : GameMonoBehaviour
 
     public virtual void RestartGame(){
         Time.timeScale = 1;
-        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene("MainPlay");
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_1);
+        //////////////////////////////////------------------------------------^^^^^^^------
         // SceneManager.LoadScene("MainPlay");
     }
 
@@ -192,6 +195,11 @@ public class GameController : GameMonoBehaviour
     public virtual void ContinueGame(){
         Time.timeScale = 1;
         this.pnlPause.Hide();
+    }
+
+    public virtual void GotoSceneMenu(){
+        Time.timeScale = 1;
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");
