@@ -29,4 +29,8 @@ public class MainMenuButtonClick : GameMonoBehaviour
     public virtual void BtnComfirmCharClick(){
         this.controller.ComfirmChar();
     }
+
+    public virtual void BtnMultiPlayClick(){
+        this.controller.MultiPlay();
+    }
 }

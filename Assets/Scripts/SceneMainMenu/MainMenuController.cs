@@ -79,4 +79,8 @@ public class MainMenuController : GameMonoBehaviour
         PlayerPrefs.SetInt("CharacterIndex", this.charIndex);
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }
+
+    public virtual void MultiPlay(){
+        SystemNotify.Instance.ShowNotify("Function in development. I will come back later.");
+    }
 }
