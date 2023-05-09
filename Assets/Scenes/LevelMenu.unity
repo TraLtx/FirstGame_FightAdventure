@@ -207,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 235561740}
-        m_TargetAssemblyTypeName: LevelMenuManager, Assembly-CSharp
-        m_MethodName: TabLevelClick
+      - m_Target: {fileID: 232817164}
+        m_TargetAssemblyTypeName: LevelMenuButtonClick, Assembly-CSharp
+        m_MethodName: TabLevelsClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -610,8 +610,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 235561740}
-        m_TargetAssemblyTypeName: LevelMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 232817164}
+        m_TargetAssemblyTypeName: LevelMenuButtonClick, Assembly-CSharp
         m_MethodName: BtnLevel_1Click
         m_Mode: 1
         m_Arguments:
@@ -816,6 +816,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199003030}
   m_CullTransparentMesh: 1
+--- !u!1 &232817162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232817163}
+  - component: {fileID: 232817164}
+  m_Layer: 0
+  m_Name: ButtonClick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232817163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232817162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 939.195, y: 575.5422, z: -4.8064585}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232817164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232817162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cb021634aa81b4caeda847389b33cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
 --- !u!1 &235561739
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +872,7 @@ GameObject:
   - component: {fileID: 235561741}
   - component: {fileID: 235561740}
   m_Layer: 0
-  m_Name: LevelMenuManager
+  m_Name: LevelMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1357,8 +1402,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 235561740}
-        m_TargetAssemblyTypeName: LevelMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 232817164}
+        m_TargetAssemblyTypeName: LevelMenuButtonClick, Assembly-CSharp
         m_MethodName: TabShopClick
         m_Mode: 1
         m_Arguments:
@@ -1491,8 +1536,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 235561740}
-        m_TargetAssemblyTypeName: LevelMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 232817164}
+        m_TargetAssemblyTypeName: LevelMenuButtonClick, Assembly-CSharp
         m_MethodName: TabPlayerClick
         m_Mode: 1
         m_Arguments:
@@ -1705,7 +1750,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 657641617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 232817164}
+        m_TargetAssemblyTypeName: LevelMenuButtonClick, Assembly-CSharp
+        m_MethodName: BtnMainMenuClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &657641617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4283,7 +4340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &2656752674181359780
 Canvas:
   m_ObjectHideFlags: 0

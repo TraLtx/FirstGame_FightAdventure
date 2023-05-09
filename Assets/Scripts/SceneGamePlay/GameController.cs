@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class GameController : GameMonoBehaviour
 {
-    private static GameController instance;
+    protected static GameController instance;
     public static GameController Instance {get => instance;}
 
     //---Game Object-------------------------------------------------------------
@@ -65,18 +65,14 @@ public class GameController : GameMonoBehaviour
         this.LoadScreenRange();
         this.LoadCamera();
         this.LoadSceneChanger();
-        // this.LoadPlayerSpawnerPoints();
     }
 
     protected virtual void LoadTileBackGround(){
         if(this.tileBackGround != null) return;
-
         this.tileBackGround = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
-        // Debug.Log(tileBackGround.cellBounds);
     }
 
     protected virtual void LoadPnlYouDie(){
-        // if(this.pnlYouDie != null) return;
         this.pnlYouDie = GameObject.Find("MainCanvas").transform.Find("Pnl_YouDie");
         this.pnlYouDie.gameObject.SetActive(false);
     }
@@ -84,7 +80,6 @@ public class GameController : GameMonoBehaviour
     protected virtual void LoadPnlPause(){
         if(this.pnlPause != null) return;
         this.pnlPause = GameObject.Find("MainCanvas").transform.Find("Pnl_Pause").GetComponent<PausePanel>();
-        // this.pnlPause.gameObject.SetActive(false);
     }
 
     protected virtual void LoadScreenRange(){
@@ -93,21 +88,9 @@ public class GameController : GameMonoBehaviour
         Vector3Int amountCell = cellBounds.size;
         float tileSize = this.tileBackGround.GetSprite(cellBounds.position).bounds.size.x;
         float tileSizeOffset = tileSize / 2 - 0.5f;
-        // if(tileSize % 2 == 0){
-        //     tileSizeOffset = tileSize / 2 - 0.5f;
-        // }else{
-        //     tileSizeOffset = tileSize / 2;
-        // }
-        // Debug.Log("cellBounds: "+cellBounds);
-        // Debug.Log("tileSize: "+tileSize);
-        // Debug.Log("tileSize%2: "+tileSize%2);
-        // Debug.Log("tileSize/2: "+tileSize/2);
-        // Debug.Log("tileSizeOffset: "+tileSizeOffset);
 
         screenMinPoint = cellBounds.position - new Vector3(tileSizeOffset, tileSizeOffset, 0);
         screenMaxPoint = cellBounds.position + new Vector3(amountCell.x + tileSizeOffset, amountCell.y + tileSizeOffset, 0);
-        // Debug.Log(tileSize);
-        // Debug.Log("Range_Screen: "+screenMinPoint+", "+screenMaxPoint);
     }
 
     protected virtual void LoadCamera(){
@@ -118,15 +101,6 @@ public class GameController : GameMonoBehaviour
         if(this.sceneChanger != null) return;
         this.sceneChanger = GameObject.Find("SceneChanger").transform;
     }
-
-    // protected virtual void LoadPlayerSpawnerPoints(){
-    //     Transform pointsObject = GameObject.Find("PlayerSpawnPoints").transform;
-
-    //     foreach (Transform point in pointsObject)
-    //     {
-    //         this.playerSpawnerPoints.Add(point);
-    //     }
-    // }
     
     protected override void Start(){
         this.SpawnThisPlayer();
@@ -172,6 +146,7 @@ public class GameController : GameMonoBehaviour
         BoxPowerSpawner.Instance.SpawnBoxPowerAllPoints();
     }
 
+    //======PUBLIC METHODs===============================================================
     public virtual void ShowDieMenu(){
         this.pnlYouDie.gameObject.SetActive(true);
     }
@@ -180,14 +155,9 @@ public class GameController : GameMonoBehaviour
         Time.timeScale = 1;
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_1);
         //////////////////////////////////------------------------------------^^^^^^^------
-        // SceneManager.LoadScene("MainPlay");
     }
 
-    public virtual void BtnPauseClick(){
-        this.PauseGame();
-    }
-
-    protected virtual void PauseGame(){
+    public virtual void PauseGame(){
         Time.timeScale = 0;
         this.pnlPause.Show();
     }
@@ -197,7 +167,7 @@ public class GameController : GameMonoBehaviour
         this.pnlPause.Hide();
     }
 
-    public virtual void GotoSceneMenu(){
+    public virtual void GotoSceneLevelMenu(){
         Time.timeScale = 1;
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }

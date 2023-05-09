@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager : GameMonoBehaviour
+public class MainMenuController : GameMonoBehaviour
 {
-    private static MainMenuManager instance;
-    public static MainMenuManager Instance => instance;
+    private static MainMenuController instance;
+    public static MainMenuController Instance => instance;
+
     [SerializeField] protected Transform sceneChanger;
 
     [SerializeField] protected Transform pnlChooseChar;
     [SerializeField] protected Transform bgChooseGreen;
     [SerializeField] protected Transform bgChooseYellow;
-    // [SerializeField] protected Transform btnGreenChar;
-    // [SerializeField] protected Transform btnYellowChar;
 
     [SerializeField] protected int charIndex = 0;
 
@@ -27,13 +26,11 @@ public class MainMenuManager : GameMonoBehaviour
         this.LoadSceneChanger();
         this.LoadPnlChooseChar();
         this.LoadBgChooseChar();
-        // this.LoadBtnChar();
     }
 
     protected virtual void LoadSceneChanger(){
         if(this.sceneChanger != null) return;
         this.sceneChanger = GameObject.Find("SceneChanger").transform;
-        this.sceneChanger.gameObject.SetActive(false);
     }
 
     protected virtual void LoadPnlChooseChar(){
@@ -52,48 +49,34 @@ public class MainMenuManager : GameMonoBehaviour
         this.bgChooseYellow.gameObject.SetActive(false);
     }
 
-    // protected virtual void LoadBtnChar(){
-    //     if(this.btnGreenChar != null && this.btnYellowChar != null) return;
+    //===PUBLIC METHODs=========================================
 
-    //     this.btnGreenChar = transform.Find("MenuCanvas/Pnl_ChooseCharacter/Btn_GreenChar");
-    //     this.btnYellowChar = transform.Find("MenuCanvas/Pnl_ChooseCharacter/Btn_YellowChar");
-    // }
-
-    public virtual void BtnSinglePlayClick(){//Debug.Log("clicked");
-        // this.sceneChanger.GetComponent<SceneChanger>().ChangeScene();
+    public virtual void SinglePlay(){
         this.pnlChooseChar.gameObject.SetActive(true);
     }
 
-    public virtual void BtnExitPnlChooseCharClick(){
+    public virtual void ExitChooseChar(){
         this.pnlChooseChar.gameObject.SetActive(false);
     }
 
-    public virtual void BtnGreenCharClick(){
+    public virtual void ChooseGreenChar(){
         this.bgChooseYellow.gameObject.SetActive(false);
         this.bgChooseGreen.gameObject.SetActive(true);
         this.charIndex = 1;
     }
 
-    public virtual void BtnYellowCharClick(){ 
+    public virtual void ChooseYellowChar(){ 
         this.bgChooseGreen.gameObject.SetActive(false);
         this.bgChooseYellow.gameObject.SetActive(true);
         this.charIndex = 2;
     }
 
-    public virtual void BtnChooseCharOkClick(){
+    public virtual void ComfirmChar(){
         if(this.charIndex == 0){
             SystemNotify.Instance.ShowNotify("Choose your character!");
             return;
         }
         PlayerPrefs.SetInt("CharacterIndex", this.charIndex);
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
-    }
-
-    // public virtual void LoadNextScene(){
-    //     SceneManager.LoadScene("MainPlay");
-    // }
-
-    public virtual void TurnOnSceneChanger(){
-        this.sceneChanger.gameObject.SetActive(true);
     }
 }

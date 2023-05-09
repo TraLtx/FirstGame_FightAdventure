@@ -25,6 +25,6 @@ public class LevelMenuSwitchTab : SwitchTab
 
     public override void ChangeToTab(string tabName){
         base.ChangeToTab(tabName);
-        SystemTile.Instance.ChangeContent(tabName);
+        SystemTitle.Instance.ChangeContent(tabName);
     }
 }

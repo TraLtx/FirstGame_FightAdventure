@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SystemTile : GameMonoBehaviour
+public class SystemTitle : GameMonoBehaviour
 {
-    private static SystemTile instance;
-    public static SystemTile Instance {get => instance;}
+    private static SystemTitle instance;
+    public static SystemTitle Instance {get => instance;}
 
     [SerializeField] protected Animator animator;
     [SerializeField] protected Text txtContent;

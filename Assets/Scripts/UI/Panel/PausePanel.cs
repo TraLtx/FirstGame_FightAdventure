@@ -27,12 +27,4 @@ public class PausePanel : GameMonoBehaviour
     public virtual void Hide(){
         this.animator.SetBool("IsShow", false);
     }
-
-    public virtual void BtnContinueClick(){
-        this.gameCtrl.ContinueGame();
-    }
-
-    public virtual void BtnRestartClick(){
-        this.gameCtrl.RestartGame();
-    }
 }

@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelMenuManager : GameMonoBehaviour
+public class LevelMenuController : GameMonoBehaviour
 {
+    private static LevelMenuController instance;
+    public static LevelMenuController Instance => instance;
+
     [SerializeField] protected SceneChanger sceneChanger;
     [SerializeField] protected LevelMenuSwitchTab switchTab;
+
+    protected override void Awake(){
+        base.Awake();
+        if(instance != null) return;
+        instance = this;
+    }
 
     protected override void LoadComponents(){
         this.LoadSceneChanger();
@@ -22,21 +31,24 @@ public class LevelMenuManager : GameMonoBehaviour
         this.switchTab = GetComponentInChildren<LevelMenuSwitchTab>();
     }
 
-    public virtual void BtnLevel_1Click(){
-        this.GoToLevel(Constant.SCENE_LEVEL_1);
+    //===PUBLIC METHODs===========================================
+    public virtual void GoToMainMenu(){
+        this.sceneChanger.ChangeScene(Constant.SCENE_MAIN_MENU);
     }
 
-    protected virtual void GoToLevel(string levelName){
+    public virtual void GoToLevel(string levelName){
         this.sceneChanger.ChangeScene(levelName);
     }
 
-    public virtual void TabLevelClick(){
+    public virtual void SwitchTabLevels(){
         this.switchTab.ChangeToTab("Levels");
     }
-    public virtual void TabPlayerClick(){
+
+    public virtual void SwitchTabPlayer(){
         this.switchTab.ChangeToTab("Player");
     }
-    public virtual void TabShopClick(){
+
+    public virtual void SwitchTabShop(){
         this.switchTab.ChangeToTab("Shop");
     }
 }
