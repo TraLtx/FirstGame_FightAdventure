@@ -25,6 +25,7 @@ public class GameController : GameMonoBehaviour
     public Transform PnlYouDie => this.pnlYouDie;
 
     [SerializeField] protected PausePanel pnlPause;
+    [SerializeField] protected PassLevelPanel pnlPassLevel;
 
 
     // [SerializeField] protected GameObject playerServerPrefab;
@@ -62,6 +63,7 @@ public class GameController : GameMonoBehaviour
         this.LoadTileBackGround();
         this.LoadPnlYouDie();
         this.LoadPnlPause();
+        this.LoadPnlPassLevel();
         this.LoadScreenRange();
         this.LoadCamera();
         this.LoadSceneChanger();
@@ -80,6 +82,11 @@ public class GameController : GameMonoBehaviour
     protected virtual void LoadPnlPause(){
         if(this.pnlPause != null) return;
         this.pnlPause = GameObject.Find("MainCanvas").transform.Find("Pnl_Pause").GetComponent<PausePanel>();
+    }
+
+    protected virtual void LoadPnlPassLevel(){
+        if(this.pnlPassLevel != null) return;
+        this.pnlPassLevel = GameObject.Find("MainCanvas").GetComponentInChildren<PassLevelPanel>();
     }
 
     protected virtual void LoadScreenRange(){
@@ -153,8 +160,7 @@ public class GameController : GameMonoBehaviour
 
     public virtual void RestartGame(){
         Time.timeScale = 1;
-        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_1);
-        //////////////////////////////////------------------------------------^^^^^^^------
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(SceneManager.GetActiveScene().name);
     }
 
     public virtual void PauseGame(){
@@ -170,6 +176,13 @@ public class GameController : GameMonoBehaviour
     public virtual void GotoSceneLevelMenu(){
         Time.timeScale = 1;
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
+    }
+
+    public virtual void PassLevel(){
+        int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
+        int coinTotal = EnemySpawner.Instance.CountSpawnPoint();
+        this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
+        this.pnlPassLevel.ShowPanel();
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");

@@ -46,4 +46,8 @@ public class SpawnerNormal : Spawner
         newObject.parent = this.holder;
         return newObject;
     }
+
+    public virtual int CountSpawnPoint(){
+        return this.spawnPoints.Count;
+    }
 }

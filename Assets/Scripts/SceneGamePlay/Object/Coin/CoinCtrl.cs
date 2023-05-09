@@ -40,6 +40,10 @@ public class CoinCtrl : GameMonoBehaviour
 
     public virtual void CollectThisCoin(Transform other){
         this.coinSender.SendCoin(other);
-        Destroy(gameObject);
+        this.BackToPool();
+    }
+
+    protected virtual void BackToPool(){
+        CoinSpawner.Instance.BackObjToPool(transform);
     }
 }

@@ -28,6 +28,8 @@ public class PlayerCtrl : GameMonoBehaviour
     [SerializeField] protected PlayerDangerEffect playerDangerEffect;
     public PlayerDangerEffect PlayerDangerEffect => this.playerDangerEffect;
 
+    [SerializeField] protected PlayerCoinReceiver coinReceiver;
+
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadSpriteRenderer();
@@ -37,6 +39,7 @@ public class PlayerCtrl : GameMonoBehaviour
         this.LoadGroundCheck();
         this.LoadShootingPoint();
         this.LoadPlayerDangerEffect();
+        this.LoadCoinReveiver();
     }
 
     protected virtual void LoadSpriteRenderer(){
@@ -72,15 +75,19 @@ public class PlayerCtrl : GameMonoBehaviour
 
     protected virtual void LoadPlayerDangerEffect(){
         if(this.playerDangerEffect != null) return;
-        this.playerDangerEffect = transform.GetComponentInChildren<PlayerDangerEffect>();
+        this.playerDangerEffect = GetComponentInChildren<PlayerDangerEffect>();
     }
 
+    protected virtual void LoadCoinReveiver(){
+        if(this.coinReceiver != null) return;
+        this.coinReceiver = GetComponentInChildren<PlayerCoinReceiver>();
+    }
     //-----------------------------------------
     protected virtual void Update(){
     }
     //----------------------------------------
-    // public virtual void OnDanger(){
-
-    // }
+    public virtual int GetCoinCollect(){
+        return this.coinReceiver.GetCoinCollect();
+    }
 
 }

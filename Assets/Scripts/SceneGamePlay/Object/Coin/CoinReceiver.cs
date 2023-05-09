@@ -15,4 +15,8 @@ public abstract class CoinReceiver : GameMonoBehaviour
         this.currentCoin += coinPoint;
         this.coinInventory.UpdateInventory(this.currentCoin);
     }
+
+    public virtual int GetCoinCollect(){
+        return this.currentCoin;
+    }
 }
