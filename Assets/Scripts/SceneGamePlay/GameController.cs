@@ -183,6 +183,9 @@ public class GameController : GameMonoBehaviour
         int coinTotal = EnemySpawner.Instance.CountSpawnPoint();
         this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
         this.pnlPassLevel.ShowPanel();
+        int playerCoins = PlayerPrefs.GetInt("PlayerCoins");
+        playerCoins += coins;
+        PlayerPrefs.SetInt("PlayerCoins", playerCoins);
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");

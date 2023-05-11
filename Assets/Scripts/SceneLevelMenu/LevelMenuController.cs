@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelMenuController : GameMonoBehaviour
 {
@@ -9,6 +10,8 @@ public class LevelMenuController : GameMonoBehaviour
 
     [SerializeField] protected SceneChanger sceneChanger;
     [SerializeField] protected LevelMenuSwitchTab switchTab;
+
+    [SerializeField] protected Text txtCoins;
 
     protected override void Awake(){
         base.Awake();
@@ -19,6 +22,7 @@ public class LevelMenuController : GameMonoBehaviour
     protected override void LoadComponents(){
         this.LoadSceneChanger();
         this.LoadSwitchTab();
+        this.LoadTxtCoins();
     }
 
     protected virtual void LoadSceneChanger(){//Debug.Log(GameObject.Find("SceneChanger0").name);
@@ -29,6 +33,16 @@ public class LevelMenuController : GameMonoBehaviour
     protected virtual void LoadSwitchTab(){
         if(this.switchTab != null) return;
         this.switchTab = GetComponentInChildren<LevelMenuSwitchTab>();
+    }
+
+    protected virtual void LoadTxtCoins(){
+        if(this.txtCoins != null) return;
+        this.txtCoins = transform.Find("Canvas/Pnl_Coin/Txt_Coins").GetComponent<Text>();
+    }
+
+    protected virtual void Start(){
+        int coins = PlayerPrefs.GetInt("PlayerCoins");Debug.Log("Coins: "+coins);
+        this.txtCoins.text = coins.ToString();
     }
 
     //===PUBLIC METHODs===========================================
