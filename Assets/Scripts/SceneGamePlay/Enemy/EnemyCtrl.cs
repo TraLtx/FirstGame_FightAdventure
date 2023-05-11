@@ -62,7 +62,9 @@ public class EnemyCtrl : GameMonoBehaviour
         this.animation = transform.GetComponent<EnemyAnimation>();
     }
     //-----------------------------------------------------
-
+    public virtual Transform GetShootingPoint(){
+        return this.enemyShootingPoint;
+    }
     public virtual void SetThisSpawnPoint(Transform spawnPoint){
         this.thisSpawnPoint = spawnPoint;
     }

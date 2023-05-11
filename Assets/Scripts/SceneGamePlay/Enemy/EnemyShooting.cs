@@ -2,37 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooting : EnemyAbstract
+public class EnemyShooting : Shooting
 {
-    [SerializeField] private float shootDelay = 0.5f;
-    [SerializeField] private float shootTimer = 0f;
+    [SerializeField] protected EnemyCtrl enemyCtrl;
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        if(!enemyCtrl.IsSeePlayer || enemyCtrl.IsDie) return;
-
-        this.Shoot();
+    protected override void SetParentCtrl(){
+        this.enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
     }
+    protected override void SetShootDelayMax(){
+        this.shootDelayMax = 0.6f;
+        this.shootDelay = this.shootDelayMax;
+    }
+    protected override void SetDelayUp(){
+        this.delayUp = 0.15f;
+    }
+    protected override void SetShootDelayMin(){
+        this.shootDelayMin = 0.1f;
+    }
+    protected override void SetShootDamMax(){
+        this.shootDamMax = 5;
+    }
+    protected override void SetShootPowerMax(){
+        this.shootPowerMax = 5;
+    }
+    protected override void SetBullet(){
+        this.bulletName = BulletSpawner.bulletOne;
+    }
+    protected override void SetShootingPoint(){
+        this.shootingPoint = this.enemyCtrl.GetShootingPoint();
+    }
+    protected override bool GetShootAble(){
+        if(!enemyCtrl.IsSeePlayer || enemyCtrl.IsDie) return false;
 
-    protected virtual void Shoot(){
-        if(this.shootTimer < this.shootDelay) this.shootTimer += Time.deltaTime;
-
-        if(this.shootTimer < this.shootDelay) return;
-        this.shootTimer = 0;
-
-        Vector3 modelScale = transform.parent.localScale;
-
-        Quaternion rotation = new Quaternion(0,0,0,1);
-        if(modelScale.x < 1){
-            rotation = new Quaternion(0,0,180,1);
-        }
-        Transform newBullet = BulletSpawner.Instance.Spawn(BulletSpawner.bulletOne, enemyCtrl.EnemyShootingPoint.position, rotation);
-        if(newBullet == null){
-            Debug.LogWarning("Can not Spawn Bullet");
-            return;
-        }
-        newBullet.gameObject.SetActive(true);
-        newBullet.GetComponent<BulletCtrl>().SetShooter(transform.parent);
+        return true;
     }
 }

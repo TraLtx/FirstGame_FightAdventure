@@ -83,9 +83,12 @@ public class PlayerCtrl : GameMonoBehaviour
         this.coinReceiver = GetComponentInChildren<PlayerCoinReceiver>();
     }
     //-----------------------------------------
-    protected virtual void Update(){
-    }
+    // protected virtual void Update(){
+    // }
     //----------------------------------------
+    public virtual Transform GetShootingPoint(){
+        return this.shootingPoint;
+    }
     public virtual int GetCoinCollect(){
         return this.coinReceiver.GetCoinCollect();
     }

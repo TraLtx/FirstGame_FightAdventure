@@ -14,10 +14,16 @@ public class BulletCtrl : GameMonoBehaviour
     [SerializeField] protected Transform shooter;
     public Transform Shooter{get => this.shooter;}
 
+    [SerializeField] protected bool isMoveAble;
+
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadDamSender();
         this.LoadBulletDespawner();
+    }
+
+    public virtual void ResetBorn(){
+        this.isMoveAble = true;
     }
 
     protected virtual void LoadDamSender(){
@@ -38,5 +44,12 @@ public class BulletCtrl : GameMonoBehaviour
 
     public virtual void SetDamage(int dam){
         this.damSender.SetDamage(dam);
+    }
+
+    public virtual void SetMoveAble(bool value){
+        this.isMoveAble = value;
+    }
+    public virtual bool GetMoveAble(){
+        return this.isMoveAble;
     }
 }

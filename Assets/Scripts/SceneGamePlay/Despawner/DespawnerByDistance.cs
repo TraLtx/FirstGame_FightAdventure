@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DespawnerByDistance : Despawner
 {
+    [Header("DespawnerByDistance")]
     [SerializeField] protected float distanceLimit;
     [SerializeField] protected float distance;
     [SerializeField] Camera mainCamera;

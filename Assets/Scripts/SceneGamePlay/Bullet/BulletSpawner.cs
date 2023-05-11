@@ -14,4 +14,5 @@ public class BulletSpawner : SpawnerWithPool
     }
 
     public static string bulletOne = "Bullet_1";
+    public static string bulletTwo = "Bullet_2";
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovement : GameMonoBehaviour
+public class BulletMovement : BulletAbstract
 {
 
     [SerializeField] private float bulletSpeed = 22f;
@@ -13,8 +13,9 @@ public class BulletMovement : GameMonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Update()
+    void FixedUpdate()
     {
+        if(! this.bulletCtrl.GetMoveAble()) return;
         transform.parent.Translate(this.moveDirection * this.bulletSpeed * Time.deltaTime);
     }
 }
