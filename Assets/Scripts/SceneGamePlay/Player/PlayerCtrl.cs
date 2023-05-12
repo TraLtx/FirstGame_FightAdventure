@@ -29,6 +29,7 @@ public class PlayerCtrl : GameMonoBehaviour
     public PlayerDangerEffect PlayerDangerEffect => this.playerDangerEffect;
 
     [SerializeField] protected PlayerCoinReceiver coinReceiver;
+    [SerializeField] protected PlayerShield shield;
 
     protected override void LoadComponents(){
         base.LoadComponents();
@@ -40,6 +41,7 @@ public class PlayerCtrl : GameMonoBehaviour
         this.LoadShootingPoint();
         this.LoadPlayerDangerEffect();
         this.LoadCoinReveiver();
+        this.LoadShield();
     }
 
     protected virtual void LoadSpriteRenderer(){
@@ -82,6 +84,10 @@ public class PlayerCtrl : GameMonoBehaviour
         if(this.coinReceiver != null) return;
         this.coinReceiver = GetComponentInChildren<PlayerCoinReceiver>();
     }
+    protected virtual void LoadShield(){
+        if(this.shield != null) return;
+        this.shield = GetComponentInChildren<PlayerShield>();
+    }
     //-----------------------------------------
     // protected virtual void Update(){
     // }
@@ -91,6 +97,10 @@ public class PlayerCtrl : GameMonoBehaviour
     }
     public virtual int GetCoinCollect(){
         return this.coinReceiver.GetCoinCollect();
+    }
+    public virtual int GetShieldStatus(){
+        if(this.shield == null) return 0;
+        return this.shield.GetShieldStatus();
     }
 
 }

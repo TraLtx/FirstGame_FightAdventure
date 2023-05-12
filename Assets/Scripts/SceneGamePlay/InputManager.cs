@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     private bool isBtnJump = false;
     private bool isBtnFight = false;
     private bool isUlti = false;
+    private bool isShield = false;
 
     void Awake()
     {
@@ -36,6 +37,9 @@ public class InputManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.K)) isUlti = true;
         if(Input.GetKeyUp(KeyCode.K)) isUlti = false;
+
+        if(Input.GetKeyDown(KeyCode.H)) isShield = true;
+        if(Input.GetKeyUp(KeyCode.H)) isShield = false;
     }
 
     
@@ -59,6 +63,9 @@ public class InputManager : MonoBehaviour
 
     public bool GetUltiStatus(){
         return isUlti;
+    }
+    public bool GetShieldStatus(){
+        return isShield;
     }
 
     //-------------------------------------------

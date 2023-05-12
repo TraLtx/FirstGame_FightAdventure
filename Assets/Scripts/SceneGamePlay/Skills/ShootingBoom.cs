@@ -41,7 +41,7 @@ public class ShootingBoom : Shooting
     }
 
     protected override void UpdateSlider(){
-        float value = GetSliderValue();
+        float value = this.GetSliderValue();
         this.circleSlider.UpdateSlider(value);//Debug.Log("timer:"+value);
     }
 
@@ -52,7 +52,7 @@ public class ShootingBoom : Shooting
 
     protected virtual void LoadSlider(){
         if(this.circleSlider != null) return;
-        this.circleSlider = transform.parent.GetComponentInChildren<UICircleSlider>();
+        this.circleSlider = transform.parent.Find("Canvas/UltiTimer").GetComponent<UICircleSlider>();
     }
 
     protected virtual void Start(){this.shootDam = 5;
