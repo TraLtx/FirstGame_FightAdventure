@@ -71,7 +71,6 @@ public class InputManager : MonoBehaviour
     //-------------------------------------------
 
     public void ClickBtnRunLeft(){
-        Debug.Log("ClickBtnRunLeft");
         isBtnRunLeft = true;
     }
 
@@ -87,6 +86,13 @@ public class InputManager : MonoBehaviour
         isBtnFight = true;
     }
 
+    public void ClickBtnUlti(){
+        isUlti = true;
+    }
+
+    public void ClickBtnShield(){
+        isShield = true;
+    }
     //---------------------------------------------
 
     public void OutClickBtnRunLeft(){
@@ -103,5 +109,13 @@ public class InputManager : MonoBehaviour
 
     public void OutClickBtnFight(){
         isBtnFight = false;
+    }
+
+    public void OutClickBtnUlti(){
+        isUlti = false;
+    }
+
+    public void OutClickBtnShield(){
+        isShield = false;
     }
 }
