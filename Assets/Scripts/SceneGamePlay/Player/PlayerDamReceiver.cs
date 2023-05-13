@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
 {
     public override void Deduct(int subNum){
-        if(subNum < transform.parent.GetComponent<PlayerCtrl>().GetShieldStatus()) return;
+        // Debug.Log(subNum);
+        if(subNum <= transform.parent.GetComponent<PlayerCtrl>().GetShieldStatus()) return;
         base.Deduct(subNum);
         // Debug.Log(transform.parent.name);
         transform.parent.GetComponent<PlayerCtrl>().PlayerDangerEffect.NotifyDanger();
