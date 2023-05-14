@@ -16,8 +16,8 @@ public class EnemyAnimation : EnemyAbstract
         this.animator = GetComponent<Animator>();
     }
 
-    public virtual void TurnOnDieAnimation(){
-        transform.GetComponent<Animator>().SetTrigger("Die");
+    public virtual void TurnOnDieAnimation(){Debug.Log("EnemyAnimation");
+        this.animator.SetTrigger("Die");
     }
 
     public virtual void DieAnimationDone(){

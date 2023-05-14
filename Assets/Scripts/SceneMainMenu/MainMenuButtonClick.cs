@@ -33,4 +33,8 @@ public class MainMenuButtonClick : GameMonoBehaviour
     public virtual void BtnMultiPlayClick(){
         this.controller.MultiPlay();
     }
+
+    public virtual void BtnQuitClick(){
+        this.controller.QuitApp();
+    }
 }

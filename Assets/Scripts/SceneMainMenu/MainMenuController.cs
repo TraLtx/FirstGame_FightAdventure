@@ -83,4 +83,8 @@ public class MainMenuController : GameMonoBehaviour
     public virtual void MultiPlay(){
         SystemNotify.Instance.ShowNotify("Function in development. I will come back later.");
     }
+
+    public virtual void QuitApp(){
+        Application.Quit();
+    }
 }

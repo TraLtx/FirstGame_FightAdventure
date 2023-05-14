@@ -59,7 +59,7 @@ public class EnemyCtrl : GameMonoBehaviour
 
     protected virtual void LoadAnimation(){
         if(this.animation != null) return;
-        this.animation = transform.GetComponent<EnemyAnimation>();
+        this.animation = GetComponent<EnemyAnimation>();
     }
     //-----------------------------------------------------
     public virtual Transform GetShootingPoint(){
@@ -69,8 +69,14 @@ public class EnemyCtrl : GameMonoBehaviour
         this.thisSpawnPoint = spawnPoint;
     }
 
+
     public virtual void Die(){
+        Debug.Log("EnemyCtrl.Die()0");
+
         this.isDie = true;
+
+        Debug.Log("EnemyCtrl.Die()1: "+this.animation);
+
         this.animation.TurnOnDieAnimation();
     }
 }
