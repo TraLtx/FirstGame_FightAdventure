@@ -13,6 +13,9 @@ public class LevelMenuController : GameMonoBehaviour
 
     [SerializeField] protected Text txtCoins;
 
+    [SerializeField] protected List<int> itemSkills;
+    [SerializeField] protected List<ShopItem> items;
+
     protected override void Awake(){
         base.Awake();
         if(instance != null) return;
@@ -23,6 +26,8 @@ public class LevelMenuController : GameMonoBehaviour
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();
+
+        this.LoadData();
     }
 
     protected virtual void LoadSceneChanger(){//Debug.Log(GameObject.Find("SceneChanger0").name);
@@ -64,5 +69,29 @@ public class LevelMenuController : GameMonoBehaviour
 
     public virtual void SwitchTabShop(){
         this.switchTab.ChangeToTab("Shop");
+        // this.LoadData();
     }
+
+    public virtual void BuyShield(){
+        if(itemSkills[0] > PlayerPrefs.GetInt("PlayerCoins")){
+            SystemNotify.Instance.ShowNotify("Not enough money!");
+            return;
+        }
+        int shiled = PlayerPrefs.GetInt("Shield");
+        shiled ++;
+        PlayerPrefs.SetInt("Shiled", shiled);
+
+        SystemNotify.Instance.ShowNotify("Buy successfully!");
+    }
+
+
+    protected virtual void LoadData(){
+
+        this.items.Add(transform.Find("Canvas/Pnl_PageContent/Shop/Skills/Skills_Container/Item_Shield").GetComponent<ShopItem>());
+
+        this.itemSkills.Add(15);
+        this.items[0].SetTxtCost("15");
+        this.items[0].SetTxtBuy("Unlock");
+    }
+
 }

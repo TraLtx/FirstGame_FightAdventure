@@ -29,4 +29,8 @@ public class LevelMenuButtonClick : GameMonoBehaviour
     public virtual void BtnLevel_1Click(){
         this.controller.GoToLevel(Constant.SCENE_LEVEL_1);
     }
+
+    public virtual void BtnItemShieldClick(){
+        this.controller.BuyShield();
+    }
 }
