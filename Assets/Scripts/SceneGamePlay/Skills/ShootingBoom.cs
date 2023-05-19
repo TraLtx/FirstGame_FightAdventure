@@ -7,6 +7,19 @@ public class ShootingBoom : Shooting
     [SerializeField] protected PlayerCtrl playerCtrl;
     [SerializeField] protected UICircleSlider circleSlider;
 
+    [SerializeField] protected Transform lockSkill;
+
+    protected override void LoadComponents(){
+        base.LoadComponents();
+        this.LoadIconLockSkill();
+        this.LoadSlider();
+    }
+
+    protected virtual void LoadIconLockSkill(){
+        if(this.lockSkill != null) return;
+        this.lockSkill = transform.parent.Find("Canvas/UltiTimer/Lock");
+    }
+
     protected override void SetParentCtrl(){
         this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
     }
@@ -34,7 +47,12 @@ public class ShootingBoom : Shooting
     protected override void SetShootingPoint(){
         this.shootingPoint = this.playerCtrl.GetShootingPoint();
     }
+    protected override void SetUseAble(){
+        this.useAble = PlayerPrefs.GetInt("Ulti") > 0;
+    }
     protected override bool GetShootAble(){
+        if(!this.useAble) return false;
+
         if(!GameController.Instance.IsOnlineState) return InputManager.Instance.GetUltiStatus();
 
         return InputManager.Instance.GetUltiStatus() && playerCtrl.View.IsMine;
@@ -45,10 +63,6 @@ public class ShootingBoom : Shooting
         this.circleSlider.UpdateSlider(value);//Debug.Log("timer:"+value);
     }
 
-    protected override void LoadComponents(){
-        base.LoadComponents();
-        this.LoadSlider();
-    }
 
     protected virtual void LoadSlider(){
         if(this.circleSlider != null) return;
@@ -56,6 +70,13 @@ public class ShootingBoom : Shooting
     }
 
     protected virtual void Start(){this.shootDam = 5;
+        if(!this.useAble){
+            this.shootTimer = 0;
+            this.UpdateSlider();
+            this.lockSkill.gameObject.SetActive(true);
+            return;
+        }
+
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);
         // this.shootDelay = 1f - this.shootPower * 0.15f;

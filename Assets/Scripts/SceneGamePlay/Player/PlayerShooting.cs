@@ -74,5 +74,9 @@ public class PlayerShooting : Shooting
         this.powerBar.UpdateBar(this.shootPower);
     }
 
+    protected override void SetUseAble(){
+        this.useAble = true;
+    }
+
     
 }

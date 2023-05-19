@@ -19,6 +19,8 @@ public abstract class Shooting : GameMonoBehaviour
     [SerializeField] protected string bulletName;
     [SerializeField] protected Transform shootingPoint;
 
+    [SerializeField] protected bool useAble;
+
     protected override void ResetValue(){
         this.SetParentCtrl();
         this.SetShootDelayMax();
@@ -28,6 +30,7 @@ public abstract class Shooting : GameMonoBehaviour
         this.SetShootPowerMax();
         this.SetBullet();
         this.SetShootingPoint();
+        this.SetUseAble();
     }
 
     protected abstract void SetParentCtrl();
@@ -38,9 +41,12 @@ public abstract class Shooting : GameMonoBehaviour
     protected abstract void SetShootPowerMax();
     protected abstract void SetBullet();
     protected abstract void SetShootingPoint();
+    protected abstract void SetUseAble();
     protected abstract bool GetShootAble();
 
     protected virtual void FixedUpdate(){
+        if(!this.useAble) return;
+
         if(this.shootTimer < this.shootDelay){
             this.shootTimer += Time.fixedDeltaTime;
             

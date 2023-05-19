@@ -36,4 +36,8 @@ public class EnemyShooting : Shooting
 
         return true;
     }
+
+    protected override void SetUseAble(){
+        this.useAble = true;
+    }
 }

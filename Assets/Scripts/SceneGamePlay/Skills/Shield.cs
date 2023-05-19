@@ -14,6 +14,8 @@ public abstract class Shield : GameMonoBehaviour
     [SerializeField] protected float delayTime;
     [SerializeField] protected float delayTimer;
 
+    [SerializeField] protected bool useAble;
+
     protected override void LoadComponents(){
         this.LoadAnimator();
     }
@@ -27,14 +29,19 @@ public abstract class Shield : GameMonoBehaviour
         this.SetShieldTime();
         this.SetShieldStartStatus();
         this.SetDelayTime();
+        this.SetUseAble();
     }
     protected abstract void SetShieldPoint();
     protected abstract void SetShieldTime();
     protected abstract void SetShieldStartStatus();
     protected abstract void SetDelayTime();
+    protected abstract void SetUseAble();
     protected abstract bool GetShieldAble();
 
     protected virtual void FixedUpdate(){
+
+        if(!this.useAble) return;
+
         if(this.GetShieldAble() && this.delayTimer >= this.delayTime){//Khi khong co khien thi khong can dem nguoc delay
             this.TurnOnShield();
             return; 
