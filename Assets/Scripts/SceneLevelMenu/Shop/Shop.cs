@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : MonoBehaviour
+public abstract class Shop : GameMonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // [SerializeField] protected List<ShopItem> shopItemList;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // protected override void LoadComponents(){
+    //     this.InitData();
+    // }
+
+    // protected virtual void InitData(){
+    //     Transform container = transform.Find("Skills_Container");
+    //     foreach (Transform item in container)
+    //     {
+    //         shopItemList.Add(item);
+    //     }
+    // }
 }
