@@ -13,6 +13,8 @@ public class LevelMenuController : GameMonoBehaviour
 
     [SerializeField] protected int coins;
     [SerializeField] protected Text txtCoins;
+    [SerializeField] protected int amountHeart;
+    [SerializeField] protected Text txtAmountHeart;
 
     [SerializeField] protected List<int> itemSkills;
     [SerializeField] protected List<ShopItem> items;
@@ -27,6 +29,7 @@ public class LevelMenuController : GameMonoBehaviour
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();
+        this.LoadTxtAmountHeart();
 
         // this.LoadData();
     }
@@ -46,13 +49,24 @@ public class LevelMenuController : GameMonoBehaviour
         this.txtCoins = transform.Find("Canvas/Pnl_Coin/Txt_Coins").GetComponent<Text>();
     }
 
+    protected virtual void LoadTxtAmountHeart(){
+        if(this.txtAmountHeart != null) return;
+        this.txtAmountHeart = transform.Find("Canvas/Pnl_Player_Item/Heart/Txt_Amount").GetComponent<Text>();
+    }
+
     protected virtual void Start(){
         this.UpdateTxtCoin();
+        this.UpdateTxtAmountHeart();
     }
 
     protected virtual void UpdateTxtCoin(){
         this.coins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
         this.txtCoins.text = this.coins.ToString();
+    }
+
+    protected virtual void UpdateTxtAmountHeart(){
+        this.amountHeart = PlayerPrefs.GetInt(Constant.SAVE_HEART_ITEMS);
+        this.txtAmountHeart.text = this.amountHeart.ToString();
     }
 
     //===PUBLIC METHODs===========================================
@@ -125,7 +139,6 @@ public class LevelMenuController : GameMonoBehaviour
 
     public virtual void BuyHeart(){
         ItemHeart itemHeart = ItemHeart.Instance;
-        int currentHeart = PlayerPrefs.GetInt(Constant.SAVE_HEART_ITEMS);
 
         if(itemHeart.GetCost() > this.coins){
             SystemNotify.Instance.ShowNotify("Not enough money!");
@@ -133,13 +146,14 @@ public class LevelMenuController : GameMonoBehaviour
         }
 
         this.coins -= itemHeart.GetCost();
-        currentHeart ++;
+        this.amountHeart ++;
 
-        Debug.Log("AfterBuy: coins-"+this.coins+" heart-"+currentHeart);
+        Debug.Log("AfterBuy: coins-"+this.coins+" heart-"+amountHeart);
 
         PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
-        PlayerPrefs.SetInt(Constant.SAVE_HEART_ITEMS, currentHeart);
+        PlayerPrefs.SetInt(Constant.SAVE_HEART_ITEMS, this.amountHeart);
         this.UpdateTxtCoin();
+        this.UpdateTxtAmountHeart();
 
         // SystemNotify.Instance.ShowNotify("Buy successfully!");
     }
