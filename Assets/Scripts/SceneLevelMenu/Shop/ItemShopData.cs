@@ -11,9 +11,7 @@ public class ItemShopData : GameMonoBehaviour
     [SerializeField] protected string infor;
     [SerializeField] public string Infor{set => this.infor = value; get => this.infor;}
 
-    public ItemShopData(){}
-
-    public ItemShopData(int level, int cost, string infor){
+    public virtual void  CreateItemShopData(int level, int cost, string infor){
         this.level = level;
         this.cost = cost;
         this.infor = infor;

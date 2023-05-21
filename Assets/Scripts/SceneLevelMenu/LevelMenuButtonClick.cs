@@ -30,7 +30,14 @@ public class LevelMenuButtonClick : GameMonoBehaviour
         this.controller.GoToLevel(Constant.SCENE_LEVEL_1);
     }
 
+    //---SHOP--------------------------------
     public virtual void BtnItemShieldClick(){
         this.controller.BuyShield();
+    }
+    public virtual void BtnItemUltiClick(){
+        this.controller.BuyUlti();
+    }
+    public virtual void BtnItemHeartClick(){
+        this.controller.BuyHeart();
     }
 }

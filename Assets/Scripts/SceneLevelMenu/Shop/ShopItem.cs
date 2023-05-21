@@ -13,11 +13,13 @@ public abstract class ShopItem : GameMonoBehaviour
 
     [SerializeField] protected Text txtCost;
     [SerializeField] protected Text txtBuy;
+    [SerializeField] protected Text txtInfor;
     [SerializeField] protected Transform pnlSoldOut;
 
     protected override void LoadComponents(){
         this.LoadTxtCost();
         this.LoadTxtBuy();
+        this.LoadTxtInfor();
         this.LoadPnlSoldOut();
         // this.InitData();
         // this.LoadPlayerData();
@@ -37,6 +39,11 @@ public abstract class ShopItem : GameMonoBehaviour
         this.txtBuy = transform.Find("Btn_Buy/Label_Buy").GetComponent<Text>();
     }
 
+    protected virtual void LoadTxtInfor(){
+        if(this.txtInfor != null) return;
+        this.txtInfor = transform.Find("Txt_Infor").GetComponent<Text>();
+    }
+
     protected virtual void LoadPnlSoldOut(){
         if(this.pnlSoldOut != null) return;
         this.pnlSoldOut = transform.Find("Pnl_SoldOut");
@@ -50,12 +57,19 @@ public abstract class ShopItem : GameMonoBehaviour
         this.txtBuy.text = value;
     }
 
+    protected virtual void SetTxtInfor(string value){
+        this.txtInfor.text = value;
+    }
+
     public virtual void SetNewItemData(){
-        this.LoadPlayerData();
+        this.LoadPlayerData();//Debug.Log("item. level: "+this.level+", max: "+this.levelMax);
         // Now I use this fast way, but it can change by use foreach
         this.cost = itemDataList[this.level].Cost;
         this.SetTxtCost(this.cost.ToString());
         this.SetTxtBuy("BUY");
+        this.SetTxtInfor(itemDataList[this.level].Infor);
+
+        this.CheckIsSoldOut();
     }
 
     public virtual int GetCost(){

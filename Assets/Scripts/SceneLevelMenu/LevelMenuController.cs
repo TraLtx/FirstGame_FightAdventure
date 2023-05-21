@@ -80,7 +80,7 @@ public class LevelMenuController : GameMonoBehaviour
     public virtual void BuyShield(){
         ItemShield itemShield = ItemShield.Instance;
         int currentShield = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);
-
+// Debug.Log("BeforeBuy: coins-"+this.coins+" shiledCost-"+itemShield.GetCost());
         if(itemShield.GetCost() > this.coins){
             SystemNotify.Instance.ShowNotify("Not enough money!");
             return;
@@ -89,13 +89,59 @@ public class LevelMenuController : GameMonoBehaviour
         this.coins -= itemShield.GetCost();
         currentShield ++;
 
+        Debug.Log("AfterBuy: coins-"+this.coins+" shiled-"+currentShield);
+
         PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
         PlayerPrefs.SetInt(Constant.SAVE_SHIELD_LEVEL, currentShield);
         this.UpdateTxtCoin();
         
-        itemShield.CheckIsSoldOut();
+        itemShield.SetNewItemData();
 
-        SystemNotify.Instance.ShowNotify("Buy successfully!");
+        // SystemNotify.Instance.ShowNotify("Buy successfully!");
+    }
+
+    public virtual void BuyUlti(){
+        ItemUlti itemUlti = ItemUlti.Instance;
+        int currentUlti = PlayerPrefs.GetInt(Constant.SAVE_ULTI_LEVEL);
+
+        if(itemUlti.GetCost() > this.coins){
+            SystemNotify.Instance.ShowNotify("Not enough money!");
+            return;
+        }
+
+        this.coins -= itemUlti.GetCost();
+        currentUlti ++;
+
+        Debug.Log("AfterBuy: coins-"+this.coins+" ulti-"+currentUlti);
+
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
+        PlayerPrefs.SetInt(Constant.SAVE_ULTI_LEVEL, currentUlti);
+        this.UpdateTxtCoin();
+        
+        itemUlti.SetNewItemData();
+
+        // SystemNotify.Instance.ShowNotify("Buy successfully!");
+    }
+
+    public virtual void BuyHeart(){
+        ItemHeart itemHeart = ItemHeart.Instance;
+        int currentHeart = PlayerPrefs.GetInt(Constant.SAVE_HEART_ITEMS);
+
+        if(itemHeart.GetCost() > this.coins){
+            SystemNotify.Instance.ShowNotify("Not enough money!");
+            return;
+        }
+
+        this.coins -= itemHeart.GetCost();
+        currentHeart ++;
+
+        Debug.Log("AfterBuy: coins-"+this.coins+" heart-"+currentHeart);
+
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
+        PlayerPrefs.SetInt(Constant.SAVE_HEART_ITEMS, currentHeart);
+        this.UpdateTxtCoin();
+
+        // SystemNotify.Instance.ShowNotify("Buy successfully!");
     }
 
 
