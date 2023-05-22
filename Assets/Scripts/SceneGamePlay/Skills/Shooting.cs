@@ -51,6 +51,7 @@ public abstract class Shooting : GameMonoBehaviour
             this.shootTimer += Time.fixedDeltaTime;
             
             this.UpdateSlider();
+            return;
         }
 
         if(! this.GetShootAble()) return;
@@ -67,10 +68,10 @@ public abstract class Shooting : GameMonoBehaviour
         return 0;
     }
 
-    protected void Shoot(){
-        if(this.shootTimer < this.shootDelay) return;
+    protected virtual void Shoot(){
+        // if(this.shootTimer < this.shootDelay) return;
         this.shootTimer = 0;
-        this.UpdateSlider();
+        // this.UpdateSlider();
 
         Vector3 modelScale = transform.parent.localScale;
 
@@ -87,9 +88,7 @@ public abstract class Shooting : GameMonoBehaviour
         newBullet.GetComponent<BulletCtrl>().SetShooter(transform.parent);
         newBullet.GetComponent<BulletCtrl>().SetDamage(this.shootDam);
         newBullet.GetComponent<BulletCtrl>().ResetBorn();
-
     }
-
     public virtual void AddShootDam(int dam){
         this.shootDam += dam;
         if(this.shootDam > this.shootDamMax) this.shootDam = this.shootDamMax;
@@ -101,5 +100,4 @@ public abstract class Shooting : GameMonoBehaviour
 
         this.shootDelay = this.shootDelayMax - this.shootPower * this.delayUp;
     }
-
 }

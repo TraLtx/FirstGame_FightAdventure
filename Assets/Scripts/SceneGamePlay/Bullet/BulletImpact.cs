@@ -28,7 +28,7 @@ public class BulletImpact : GameMonoBehaviour
         this.animator = GetComponent<Animator>();
     }
     
-    protected void OnTriggerEnter2D(Collider2D other){
+    protected virtual void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "NotPhysic" || other.tag == "Bullet" || bulletCtrl.Shooter == other.transform) return;
 
         bulletCtrl.SetMoveAble(false);

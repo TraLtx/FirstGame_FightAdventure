@@ -9,6 +9,7 @@ public class PlayerSpawner : SpawnerNormal
     public static PlayerSpawner Instance {get => instance;}
 
     public static string player = "Player";
+    public static string player_2 = "Player_2";
     public static string spawnPointServer = "PlayerSpawnPoint_1";
     public static string spawnPointClient = "PlayerSpawnPoint_2";
 

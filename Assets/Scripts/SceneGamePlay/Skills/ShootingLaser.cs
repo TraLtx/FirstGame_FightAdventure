@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingBoom : Shooting
+public class ShootingLaser : Shooting
 {
     [SerializeField] protected PlayerCtrl playerCtrl;
     [SerializeField] protected UICircleSlider circleSlider;
 
     [SerializeField] protected Transform lockSkill;
+
+    [SerializeField] protected int laserAmount = 10;
 
     protected override void LoadComponents(){
         base.LoadComponents();
@@ -42,7 +44,7 @@ public class ShootingBoom : Shooting
         this.shootPowerMax = 5;
     }
     protected override void SetBullet(){
-        this.bulletName = BulletSpawner.bulletTwo;
+        this.bulletName = BulletSpawner.bulletLaser;
     }
     protected override void SetShootingPoint(){
         this.shootingPoint = this.playerCtrl.GetShootingPoint();
@@ -65,10 +67,20 @@ public class ShootingBoom : Shooting
         this.circleSlider.UpdateSlider(value);//Debug.Log("timer:"+value);
     }
 
-
     protected virtual void LoadSlider(){
         if(this.circleSlider != null) return;
         this.circleSlider = transform.parent.Find("Canvas/UltiTimer").GetComponent<UICircleSlider>();
+    }
+
+    protected override void Shoot(){
+            base.Shoot();
+        // if(this.laserAmount > 0){
+        //     this.laserAmount -= 1;
+        //     //Delay
+        //     Invoke("Shoot", 0.04f);
+        // }else{
+        //     this.laserAmount = 10;
+        // }
     }
 
     protected virtual void Start(){this.shootDam = 5;
@@ -83,8 +95,4 @@ public class ShootingBoom : Shooting
         // this.powerBar.UpdateBar(this.shootPower);
         // this.shootDelay = 1f - this.shootPower * 0.15f;
     }
-
-    // public virtual void SetDam(){
-    //     //
-    // }
 }
