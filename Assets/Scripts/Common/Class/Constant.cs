@@ -14,6 +14,7 @@ public class Constant
     public const string SCENE_LEVEL_2 = "Level_2";
 
     //====PLAYER_PROPERTIES_SAVE_NAME=====================
+    public const string SAVE_CHAR = "CharacterIndex";
     public const string SAVE_COINS = "PlayerCoins";
     public const string SAVE_HEART_ITEMS = "HeartItem";
 

@@ -77,7 +77,7 @@ public class ShootingBoom : Shooting
             this.UpdateSlider();
             this.lockSkill.gameObject.SetActive(true);
             return;
-        }
+        }this.lockSkill.gameObject.SetActive(false);
 
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);

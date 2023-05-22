@@ -52,7 +52,9 @@ public class MainMenuController : GameMonoBehaviour
     //===PUBLIC METHODs=========================================
 
     public virtual void SinglePlay(){
-        this.pnlChooseChar.gameObject.SetActive(true);
+        if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 0)
+            this.pnlChooseChar.gameObject.SetActive(true);
+        else this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }
 
     public virtual void ExitChooseChar(){

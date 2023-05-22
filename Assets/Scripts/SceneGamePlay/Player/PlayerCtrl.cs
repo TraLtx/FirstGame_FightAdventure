@@ -5,6 +5,14 @@ using Photon.Pun;
 
 public class PlayerCtrl : GameMonoBehaviour
 {
+    // protected static PlayerCtrl instance;
+    // public static PlayerCtrl Instance {get => instance;}
+
+    // protected override void Awake(){
+    //     base.Awake();
+    //     if(instance != null) return;
+    //     instance = this;
+    // }
     //---Component-------------------------------------------------
     [SerializeField] protected SpriteRenderer spriteRenderer;
     public SpriteRenderer SpriteRenderer => this.spriteRenderer;

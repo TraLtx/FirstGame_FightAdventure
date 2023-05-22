@@ -36,7 +36,7 @@ public class PlayerShield : Shield
         this.UpdateSlider();
     }
     protected override void SetUseAble(){
-        this.useAble = PlayerPrefs.GetInt("Shield") > 0;
+        this.useAble = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL) > 0;
     }
     protected override bool GetShieldAble(){
         if(!GameController.Instance.IsOnlineState && this.useAble) return InputManager.Instance.GetShieldStatus();
@@ -56,12 +56,12 @@ public class PlayerShield : Shield
     }
 
     protected virtual void Start(){
-        if(PlayerPrefs.GetInt("Shield") == 0){
+        if(!this.useAble){
             this.delayTimer = 0;
             this.UpdateSlider();
             this.lockSkill.gameObject.SetActive(true);
             return;
-        }
+        }this.lockSkill.gameObject.SetActive(false);
         
     }
 }

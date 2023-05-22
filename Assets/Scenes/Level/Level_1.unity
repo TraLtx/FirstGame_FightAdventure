@@ -409,7 +409,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 6972276322753412980}
   useAble: 0
   playerCtrl: {fileID: 6972276320953576414}
-  circleSlider: {fileID: 1581624778}
+  circleSlider: {fileID: 0}
   lockSkill: {fileID: 1838902083}
 --- !u!1 &73010148
 GameObject:
@@ -2952,10 +2952,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 316696287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de1a8ee7667203b47be8b979ccb62aca, type: 3}
+  m_Script: {fileID: 11500000, guid: 0180240c1dce7c84492db5a92c7173ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillArea: {fileID: 504599203}
+  fillArea: {fileID: 0}
 --- !u!1 &317598192
 GameObject:
   m_ObjectHideFlags: 0
@@ -6653,7 +6653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 214, y: -110}
+  m_AnchoredPosition: {x: 214, y: -100}
   m_SizeDelta: {x: 39.1546, y: 39.1546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &700371124
@@ -7795,7 +7795,7 @@ MonoBehaviour:
   delayTime: 30
   delayTimer: 30
   useAble: 0
-  circleSlider: {fileID: 1394242240}
+  circleSlider: {fileID: 0}
   lockSkill: {fileID: 2023685997}
 --- !u!1 &804369146
 GameObject:
@@ -9635,7 +9635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &936420993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10300,7 +10300,7 @@ MonoBehaviour:
   delayTime: 30
   delayTimer: 30
   useAble: 0
-  circleSlider: {fileID: 316696289}
+  circleSlider: {fileID: 0}
   lockSkill: {fileID: 936420993}
 --- !u!212 &993595694
 SpriteRenderer:
@@ -11535,7 +11535,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -211, y: -110}
+  m_AnchoredPosition: {x: -211, y: -100}
   m_SizeDelta: {x: 39.154602, y: 39.1546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1124355980
@@ -13205,7 +13205,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 199362255}
   useAble: 0
   playerCtrl: {fileID: 1024982497}
-  circleSlider: {fileID: 1776013015}
+  circleSlider: {fileID: 0}
   lockSkill: {fileID: 1374563419}
   laserAmount: 10
 --- !u!1 &1332461746
@@ -13714,7 +13714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1374563419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14224,7 +14224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -298, y: -110}
+  m_AnchoredPosition: {x: -298, y: -100}
   m_SizeDelta: {x: 39.154602, y: 39.1546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1406790064
@@ -16110,10 +16110,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1581624776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de1a8ee7667203b47be8b979ccb62aca, type: 3}
+  m_Script: {fileID: 11500000, guid: bd92b12c3af152b45871e580a26dd531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillArea: {fileID: 304595925}
+  fillArea: {fileID: 0}
 --- !u!1 &1582853404
 GameObject:
   m_ObjectHideFlags: 0
@@ -17132,7 +17132,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.2634597, y: 1.7454824, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1610839698}
   - {fileID: 886197957}
@@ -28630,7 +28630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1838902083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29989,7 +29989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1973081103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30562,7 +30562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2023685997
 RectTransform:
   m_ObjectHideFlags: 0
