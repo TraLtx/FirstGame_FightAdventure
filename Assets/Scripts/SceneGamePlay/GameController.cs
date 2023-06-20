@@ -26,6 +26,7 @@ public class GameController : GameMonoBehaviour
 
     [SerializeField] protected PausePanel pnlPause;
     [SerializeField] protected PassLevelPanel pnlPassLevel;
+    [SerializeField] protected ParticleSystem passLevelParticle;
 
 
     // [SerializeField] protected GameObject playerServerPrefab;
@@ -64,6 +65,7 @@ public class GameController : GameMonoBehaviour
         this.LoadPnlYouDie();
         this.LoadPnlPause();
         this.LoadPnlPassLevel();
+        this.LoadParticlePassLevel();
         this.LoadScreenRange();
         this.LoadCamera();
         this.LoadSceneChanger();
@@ -85,6 +87,11 @@ public class GameController : GameMonoBehaviour
     }
 
     protected virtual void LoadPnlPassLevel(){
+        if(this.passLevelParticle != null) return;
+        this.passLevelParticle = GameObject.Find("PassLevelParticle").GetComponent<ParticleSystem>();
+    }
+
+    protected virtual void LoadParticlePassLevel(){
         if(this.pnlPassLevel != null) return;
         this.pnlPassLevel = GameObject.Find("MainCanvas").GetComponentInChildren<PassLevelPanel>();
     }
@@ -181,6 +188,8 @@ public class GameController : GameMonoBehaviour
     }
 
     public virtual void PassLevel(){
+        Time.timeScale = 0;
+
         int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
         int coinTotal = EnemySpawner.Instance.CountSpawnPoint();
         this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
@@ -188,6 +197,17 @@ public class GameController : GameMonoBehaviour
         int playerCoins = PlayerPrefs.GetInt("PlayerCoins");
         playerCoins += coins;
         PlayerPrefs.SetInt("PlayerCoins", playerCoins);
+
+        this.PlayParticle();
+    }
+
+    protected virtual void PlayParticle(){
+
+        Vector3 topLeft = camera.ViewportToWorldPoint(new Vector3(0, 1, camera.nearClipPlane));
+        Vector3 topRight = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+
+        passLevelParticle.transform.position = new Vector3((topLeft.x + topRight.x)/2, topLeft.y, 0);
+        passLevelParticle.Play();
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");

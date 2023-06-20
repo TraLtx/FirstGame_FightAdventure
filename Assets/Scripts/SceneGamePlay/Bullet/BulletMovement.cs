@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletMovement : BulletAbstract
 {
 
-    [SerializeField] private float bulletSpeed = 22f;
+    [SerializeField] private float bulletSpeed = 30f;
     [SerializeField] private Vector3 moveDirection;
 
     void Start(){

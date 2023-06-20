@@ -27,7 +27,6 @@ public class ShootingBoom : Shooting
         this.shootDelayMax = 30f;
         this.shootDelay = this.shootDelayMax;
         this.shootTimer = this.shootDelay;
-        this.UpdateSlider();
     }
     protected override void SetDelayUp(){
         this.delayUp = 0.15f;
@@ -74,10 +73,11 @@ public class ShootingBoom : Shooting
     protected virtual void Start(){this.shootDam = 5;
         if(!this.useAble){
             this.shootTimer = 0;
-            this.UpdateSlider();
             this.lockSkill.gameObject.SetActive(true);
             return;
         }this.lockSkill.gameObject.SetActive(false);
+
+        this.UpdateSlider();
 
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);

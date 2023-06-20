@@ -88,4 +88,5 @@ public abstract class Shield : GameMonoBehaviour
     public virtual int GetShieldStatus(){
         return this.shieldStatus;
     }
+
 }

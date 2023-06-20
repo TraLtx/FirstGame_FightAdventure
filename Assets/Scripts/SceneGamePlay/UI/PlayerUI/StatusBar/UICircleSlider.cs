@@ -8,7 +8,7 @@ public class UICircleSlider : GameMonoBehaviour
     [SerializeField] protected Image fillArea;
     // [SerializeField] protected Transform pnlLock;
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("UICircleSlider.LoadComponents");
         this.LoadFillArea();
         // this.LoadLock();
     }
@@ -20,7 +20,7 @@ public class UICircleSlider : GameMonoBehaviour
     // }
 
     protected virtual void LoadFillArea(){
-        if(this.fillArea != null) return;
+        if(this.fillArea != null) return;//Debug.Log("FillArea: "+transform.Find("CircleFillArea").GetComponent<Image>().name);
         this.fillArea = transform.Find("CircleFillArea").GetComponent<Image>();
     }
     // protected virtual void LoadLock(){
@@ -28,8 +28,8 @@ public class UICircleSlider : GameMonoBehaviour
     //     this.pnlLock = transform.Find("Lock");
     // }
 
-    public virtual void UpdateSlider(float value){
-        this.fillArea.fillAmount = value;
+    public virtual void UpdateSlider(float value){Debug.Log("this.fillArea: "+this.fillArea.name);
+       this.fillArea.fillAmount = value;
     }
 
     // protected abstract bool CheckCanUse();

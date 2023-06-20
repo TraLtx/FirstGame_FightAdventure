@@ -33,7 +33,6 @@ public class PlayerShield : Shield
     protected override void SetDelayTime(){
         this.delayTime = 30f;
         this.delayTimer = this.delayTime;
-        this.UpdateSlider();
     }
     protected override void SetUseAble(){
         this.useAble = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL) > 0;
@@ -55,13 +54,14 @@ public class PlayerShield : Shield
         this.circleSlider = transform.parent.Find("Canvas/ShieldTimer").GetComponent<UICircleSlider>();
     }
 
-    protected virtual void Start(){
+    protected virtual void Start(){Debug.Log("PlayerShield.Start");
         if(!this.useAble){
             this.delayTimer = 0;
-            this.UpdateSlider();
             this.lockSkill.gameObject.SetActive(true);
             return;
         }this.lockSkill.gameObject.SetActive(false);
+
+        this.UpdateSlider();
         
     }
 }
