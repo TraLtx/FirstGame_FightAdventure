@@ -79,9 +79,11 @@ public class PlayerMovement : PlayerAbstract
         if (isFacingRight && horizontalMove < 0f || !isFacingRight && horizontalMove > 0f)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.parent.localScale;
-            localScale.x *= -1f;
-            transform.parent.localScale = localScale;
+
+            transform.parent.Rotate(0f, 180f, 0f);
+            // Vector3 localScale = transform.parent.localScale;
+            // localScale.x *= -1f;
+            // transform.parent.localScale = localScale;
         }
     }
 

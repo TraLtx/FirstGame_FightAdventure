@@ -11,6 +11,9 @@ public class ShootingLaser : Shooting
 
     [SerializeField] protected int laserAmount = 10;
 
+    // [SerializeField] protected int damage = 1;
+    [SerializeField] protected LineRenderer lineRenderer;
+
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadIconLockSkill();
@@ -71,8 +74,53 @@ public class ShootingLaser : Shooting
         this.circleSlider = transform.parent.Find("Canvas/UltiTimer").GetComponent<UICircleSlider>();
     }
 
-    protected override void Shoot(){
-            base.Shoot();
+    protected virtual void FixedUpdate(){
+        if(!this.useAble) return;
+
+        if(this.shootTimer < this.shootDelay){
+            this.shootTimer += Time.fixedDeltaTime;
+            
+            this.UpdateSlider();
+            return;
+        }
+
+        if(! this.GetShootAble()) return;
+        StartCoroutine(this.Shoot());
+    }
+
+    protected virtual IEnumerator Shoot(){
+            //base.Shoot();
+            this.shootTimer = 0;
+            // if(transform.parent.localScale.x < 0){
+            //     Physics2D.Raycast(this.shootingPoint.position, this.shootingPoint.right*-1);
+            // }else{
+            //     Physics2D.Raycast(this.shootingPoint.position, this.shootingPoint.right);
+            // }
+
+            RaycastHit2D[] hitInfor = Physics2D.RaycastAll(this.shootingPoint.position, this.shootingPoint.right);
+
+            // Debug.Log("Hit Infor: "+hitInfor);
+            this.lineRenderer.SetPosition(0, this.shootingPoint.position);
+            this.lineRenderer.SetPosition(1, this.shootingPoint.position + this.shootingPoint.right * 50);
+            if(hitInfor.Length >= 0){
+                foreach (RaycastHit2D hit in hitInfor)
+                {
+                    if(hit.transform.tag == "Player") continue;
+
+                    DamReceiver damReceiver = hit.transform.GetComponentInChildren<DamReceiver>();
+                    if(damReceiver == null){
+                        continue;
+                    }else{
+                        Debug.Log("Hit: "+hit.transform.name);
+                        Debug.Log("Damage: "+this.shootDam);
+                        damReceiver.Deduct(this.shootDam);
+                    }
+                }
+            }
+
+            this.lineRenderer.enabled = true;
+            yield return new WaitForSeconds(Time.deltaTime);
+            this.lineRenderer.enabled = false;
         // if(this.laserAmount > 0){
         //     this.laserAmount -= 1;
         //     //Delay
@@ -82,7 +130,7 @@ public class ShootingLaser : Shooting
         // }
     }
 
-    protected virtual void Start(){this.shootDam = 5;
+    protected virtual void Start(){this.shootDam = 1;
         if(!this.useAble){
             this.shootTimer = 0;
             this.lockSkill.gameObject.SetActive(true);

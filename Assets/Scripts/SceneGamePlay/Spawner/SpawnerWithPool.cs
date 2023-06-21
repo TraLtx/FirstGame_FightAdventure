@@ -20,6 +20,7 @@ public abstract class SpawnerWithPool : Spawner
         }
 
         Transform newPrefab = this.GetObjectFromPool(prefab);
+        // newPrefab.transform.position = position;
         newPrefab.SetPositionAndRotation(position, rotation);
 
         return newPrefab;

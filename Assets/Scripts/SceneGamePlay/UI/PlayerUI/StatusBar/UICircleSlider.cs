@@ -28,7 +28,7 @@ public class UICircleSlider : GameMonoBehaviour
     //     this.pnlLock = transform.Find("Lock");
     // }
 
-    public virtual void UpdateSlider(float value){Debug.Log("this.fillArea: "+this.fillArea.name);
+    public virtual void UpdateSlider(float value){//Debug.Log("this.fillArea: "+this.fillArea.name);
        this.fillArea.fillAmount = value;
     }
 

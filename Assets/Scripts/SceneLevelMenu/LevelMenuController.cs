@@ -119,6 +119,7 @@ public class LevelMenuController : GameMonoBehaviour
     }
     public virtual void SwitchTabShop(){
         this.switchTab.ChangeToTab("Shop");
+        
         if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 1){
             this.itemUlti_1.gameObject.SetActive(true);
             this.itemUlti_2.gameObject.SetActive(false);

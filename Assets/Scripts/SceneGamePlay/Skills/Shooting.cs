@@ -79,7 +79,7 @@ public abstract class Shooting : GameMonoBehaviour
         if(modelScale.x < 1){
             rotation = new Quaternion(0,0,180,1);
         }
-        Transform newBullet = BulletSpawner.Instance.Spawn(this.bulletName, this.shootingPoint.position, rotation);
+        Transform newBullet = BulletSpawner.Instance.Spawn(this.bulletName, this.shootingPoint.position, this.shootingPoint.rotation);
         if(newBullet == null){
             Debug.LogWarning("Can not Spawn Bullet");
             return;
