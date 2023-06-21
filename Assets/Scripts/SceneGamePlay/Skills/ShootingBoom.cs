@@ -47,8 +47,8 @@ public class ShootingBoom : Shooting
         this.shootingPoint = this.playerCtrl.GetShootingPoint();
     }
     protected override void SetUseAble(){
-        this.useAble = PlayerPrefs.GetInt(Constant.SAVE_ULTI_LEVEL) > 0;
-        Debug.Log("Ulti Save: "+PlayerPrefs.GetInt(Constant.SAVE_ULTI_LEVEL));
+        this.useAble = PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL) > 0;
+        Debug.Log("Ulti Save: "+PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL));
         Debug.Log("useAble: "+this.useAble);
     }
     protected override bool GetShootAble(){

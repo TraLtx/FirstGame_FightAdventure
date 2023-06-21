@@ -20,5 +20,6 @@ public class Constant
 
     //====SHOP_ITEM_SAVE_NAME=====================
     public const string SAVE_SHIELD_LEVEL = "ShieldLevel";
-    public const string SAVE_ULTI_LEVEL = "UltiLevel";
+    public const string SAVE_ULTI_1_LEVEL = "Ulti1Level";
+    public const string SAVE_ULTI_2_LEVEL = "Ulti2Level";
 }

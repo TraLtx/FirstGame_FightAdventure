@@ -13,11 +13,19 @@ public class LevelMenuController : GameMonoBehaviour
 
     [SerializeField] protected int coins;
     [SerializeField] protected Text txtCoins;
+
+    //---Player-------------------------------------------
+    [SerializeField] protected Image imgChar;
+
+    //---Shop---------------------------------------------
     [SerializeField] protected int amountHeart;
     [SerializeField] protected Text txtAmountHeart;
 
-    [SerializeField] protected List<int> itemSkills;
-    [SerializeField] protected List<ShopItem> items;
+    [SerializeField] protected Transform itemUlti_1;
+    [SerializeField] protected Transform itemUlti_2;
+
+    // [SerializeField] protected List<int> itemSkills;
+    // [SerializeField] protected List<ShopItem> items;
 
     protected override void Awake(){
         base.Awake();PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
@@ -29,7 +37,10 @@ public class LevelMenuController : GameMonoBehaviour
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();
+        this.LoadImgChar();
         this.LoadTxtAmountHeart();
+        this.LoadItemUlti1();
+        this.LoadItemUlti2();
 
         // this.LoadData();
     }
@@ -49,9 +60,24 @@ public class LevelMenuController : GameMonoBehaviour
         this.txtCoins = transform.Find("Canvas/Pnl_Coin/Txt_Coins").GetComponent<Text>();
     }
 
+    protected virtual void LoadImgChar(){
+        if(this.imgChar != null) return;
+        this.imgChar = transform.Find("Canvas/Pnl_PageContent/Player/Imag_CharIcon").GetComponent<Image>();
+    }
+
     protected virtual void LoadTxtAmountHeart(){
         if(this.txtAmountHeart != null) return;
         this.txtAmountHeart = transform.Find("Canvas/Pnl_Player_Item/Heart/Txt_Amount").GetComponent<Text>();
+    }
+
+    protected virtual void LoadItemUlti1(){
+        if(this.itemUlti_1 != null) return;
+        this.itemUlti_1 = transform.Find("Canvas/Pnl_PageContent/Shop/Skills/Skills_Container/Item_Ulti/Ulti1");
+    }
+
+    protected virtual void LoadItemUlti2(){
+        if(this.itemUlti_2 != null) return;
+        this.itemUlti_2 = transform.Find("Canvas/Pnl_PageContent/Shop/Skills/Skills_Container/Item_Ulti/Ulti2");
     }
 
     protected virtual void Start(){
@@ -78,23 +104,46 @@ public class LevelMenuController : GameMonoBehaviour
         this.sceneChanger.ChangeScene(levelName);
     }
 
+    //---SwitchTab---------------------------------------
     public virtual void SwitchTabLevels(){
         this.switchTab.ChangeToTab("Levels");
     }
-
     public virtual void SwitchTabPlayer(){
+        if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 1){
+            this.imgChar.sprite = Resources.Load<Sprite>("Sprites/Box_Char_Green");
+        }else if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 2){
+            this.imgChar.sprite = Resources.Load<Sprite>("Sprites/Box_Char_Yellow");
+        }
+
         this.switchTab.ChangeToTab("Player");
     }
-
     public virtual void SwitchTabShop(){
         this.switchTab.ChangeToTab("Shop");
+        if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 1){
+            this.itemUlti_1.gameObject.SetActive(true);
+            this.itemUlti_2.gameObject.SetActive(false);
+        }else if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 2){
+            this.itemUlti_1.gameObject.SetActive(false);
+            this.itemUlti_2.gameObject.SetActive(true);
+        }
         // this.LoadData();
     }
 
+    //---Player-------------------------------------------------
+    public virtual void ChangeChar(){
+        if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 1){
+            PlayerPrefs.SetInt(Constant.SAVE_CHAR, 2);
+            this.imgChar.sprite = Resources.Load<Sprite>("Sprites/Box_Char_Yellow");
+        }else if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 2){
+            PlayerPrefs.SetInt(Constant.SAVE_CHAR, 1);
+            this.imgChar.sprite = Resources.Load<Sprite>("Sprites/Box_Char_Green");
+        }
+    }
+
+    //---Shop---------------------------------------------------
     public virtual void BuyShield(){
         ItemShield itemShield = ItemShield.Instance;
         int currentShield = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);
-// Debug.Log("BeforeBuy: coins-"+this.coins+" shiledCost-"+itemShield.GetCost());
         if(itemShield.GetCost() > this.coins){
             SystemNotify.Instance.ShowNotify("Not enough money!");
             return;
@@ -111,12 +160,11 @@ public class LevelMenuController : GameMonoBehaviour
         
         itemShield.SetNewItemData();
 
-        // SystemNotify.Instance.ShowNotify("Buy successfully!");
     }
 
-    public virtual void BuyUlti(){
-        ItemUlti itemUlti = ItemUlti.Instance;
-        int currentUlti = PlayerPrefs.GetInt(Constant.SAVE_ULTI_LEVEL);
+    public virtual void BuyUlti1(){
+        ItemUlti1 itemUlti = ItemUlti1.Instance;
+        int currentUlti = PlayerPrefs.GetInt(Constant.SAVE_ULTI_1_LEVEL);
 
         if(itemUlti.GetCost() > this.coins){
             SystemNotify.Instance.ShowNotify("Not enough money!");
@@ -129,12 +177,31 @@ public class LevelMenuController : GameMonoBehaviour
         Debug.Log("AfterBuy: coins-"+this.coins+" ulti-"+currentUlti);
 
         PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
-        PlayerPrefs.SetInt(Constant.SAVE_ULTI_LEVEL, currentUlti);
+        PlayerPrefs.SetInt(Constant.SAVE_ULTI_1_LEVEL, currentUlti);
         this.UpdateTxtCoin();
         
         itemUlti.SetNewItemData();
+    }
 
-        // SystemNotify.Instance.ShowNotify("Buy successfully!");
+    public virtual void BuyUlti2(){
+        ItemUlti2 itemUlti = ItemUlti2.Instance;
+        int currentUlti = PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL);
+
+        if(itemUlti.GetCost() > this.coins){
+            SystemNotify.Instance.ShowNotify("Not enough money!");
+            return;
+        }
+
+        this.coins -= itemUlti.GetCost();
+        currentUlti ++;
+
+        Debug.Log("AfterBuy: coins-"+this.coins+" ulti-"+currentUlti);
+
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, this.coins);
+        PlayerPrefs.SetInt(Constant.SAVE_ULTI_2_LEVEL, currentUlti);
+        this.UpdateTxtCoin();
+        
+        itemUlti.SetNewItemData();
     }
 
     public virtual void BuyHeart(){
@@ -154,8 +221,6 @@ public class LevelMenuController : GameMonoBehaviour
         PlayerPrefs.SetInt(Constant.SAVE_HEART_ITEMS, this.amountHeart);
         this.UpdateTxtCoin();
         this.UpdateTxtAmountHeart();
-
-        // SystemNotify.Instance.ShowNotify("Buy successfully!");
     }
 
 

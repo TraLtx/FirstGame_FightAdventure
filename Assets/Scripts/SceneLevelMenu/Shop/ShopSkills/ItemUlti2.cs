@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemUlti : ShopItem
+public class ItemUlti2 : ShopItem
 {
-    protected static ItemUlti instance;
-    public static ItemUlti Instance {get => instance;}
+    protected static ItemUlti2 instance;
+    public static ItemUlti2 Instance {get => instance;}
 
     protected override void Awake(){
         base.Awake();
@@ -25,7 +25,7 @@ public class ItemUlti : ShopItem
     }
 
     protected override void LoadPlayerData(){
-        this.level = PlayerPrefs.GetInt(Constant.SAVE_ULTI_LEVEL);
+        this.level = PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL);
         Debug.Log("Ulti_Save: "+this.level);
     }
 
@@ -40,7 +40,7 @@ public class ItemUlti : ShopItem
         GameObject itemLevel_1 = new GameObject("ItemLevel_1");
         itemLevel_1.transform.SetParent(dataholder.transform);
         ItemShopData itemData = itemLevel_1.AddComponent<ItemShopData>();
-        itemData.CreateItemShopData(startLevel, 15, "Unlock Shield");
+        itemData.CreateItemShopData(startLevel, 15, "Unlock Ulti");
         this.itemDataList.Add(itemData);
 
         GameObject itemLevel_2 = new GameObject("ItemLevel_2");
