@@ -20,7 +20,8 @@ public class BoxPowerImpact : GameMonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other){
         if(! (other.tag == "Player")) return;
 
-        this.boxPowerCtrl.UpgradePower.GetComponent<UpgradePower>().Upgrade(other.transform);
+        this.boxPowerCtrl.CollectThisBoxPower(other.transform);
+        // this.boxPowerCtrl.UpgradePower.GetComponent<UpgradePower>().Upgrade(other.transform);
         Destroy(transform.gameObject);
     }
 }

@@ -20,7 +20,9 @@ public class BoxGunImpact : GameMonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other){
         if(! (other.tag == "Player")) return;
 
-        this.boxGunCtrl.UpgradeGun.GetComponent<UpgradeGun>().Upgrade(other.transform);
+        this.boxGunCtrl.CollectThisBoxGun(other.transform);
+
+        // this.boxGunCtrl.UpgradeGun.GetComponent<UpgradeGun>().Upgrade(other.transform);
         Destroy(transform.gameObject);
     }
 }

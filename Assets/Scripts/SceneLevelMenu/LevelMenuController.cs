@@ -13,6 +13,10 @@ public class LevelMenuController : GameMonoBehaviour
 
     [SerializeField] protected int coins;
     [SerializeField] protected Text txtCoins;
+    [SerializeField] protected int boxGuns;
+    [SerializeField] protected Text txtBoxGuns;
+    [SerializeField] protected int boxPowers;
+    [SerializeField] protected Text txtBoxPowers;
 
     //---Player-------------------------------------------
     [SerializeField] protected Image imgChar;
@@ -37,6 +41,8 @@ public class LevelMenuController : GameMonoBehaviour
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();
+        this.LoadTxtBoxGuns();
+        this.LoadTxtBoxPowers();
         this.LoadImgChar();
         this.LoadTxtAmountHeart();
         this.LoadItemUlti1();
@@ -58,6 +64,14 @@ public class LevelMenuController : GameMonoBehaviour
     protected virtual void LoadTxtCoins(){
         if(this.txtCoins != null) return;
         this.txtCoins = transform.Find("Canvas/Pnl_Coin/Txt_Coins").GetComponent<Text>();
+    }
+    protected virtual void LoadTxtBoxGuns(){
+        if(this.txtBoxGuns != null) return;
+        this.txtBoxGuns = transform.Find("Canvas/Pnl_BoxGun/Txt_BoxGuns").GetComponent<Text>();
+    }
+    protected virtual void LoadTxtBoxPowers(){
+        if(this.txtBoxPowers != null) return;
+        this.txtBoxPowers = transform.Find("Canvas/Pnl_BoxPower/Txt_BoxPowers").GetComponent<Text>();
     }
 
     protected virtual void LoadImgChar(){
@@ -82,12 +96,22 @@ public class LevelMenuController : GameMonoBehaviour
 
     protected virtual void Start(){
         this.UpdateTxtCoin();
+        this.UpdateTxtBoxGun();
+        this.UpdateTxtBoxPower();
         this.UpdateTxtAmountHeart();
     }
 
     protected virtual void UpdateTxtCoin(){
         this.coins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
         this.txtCoins.text = this.coins.ToString();
+    }
+    protected virtual void UpdateTxtBoxGun(){
+        this.boxGuns = PlayerPrefs.GetInt(Constant.SAVE_BOX_GUN);
+        this.txtBoxGuns.text = this.boxGuns.ToString();
+    }
+    protected virtual void UpdateTxtBoxPower(){
+        this.boxPowers = PlayerPrefs.GetInt(Constant.SAVE_BOX_POWER);
+        this.txtBoxPowers.text = this.boxPowers.ToString();
     }
 
     protected virtual void UpdateTxtAmountHeart(){

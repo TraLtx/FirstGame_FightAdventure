@@ -19,4 +19,27 @@ public class PlayerSpawner : SpawnerNormal
         instance = this;
     }
 
+    public override Transform Spawn(string prefabName, string spawnPointName){
+        Transform prefab = this.GetPrefabByName(prefabName);
+        if(prefab == null){
+            Debug.LogWarning("Can not found this prefabName: " + prefabName);
+            return null;
+        }
+
+        Transform spawnPoint = this.GetSpawnPointByName(spawnPointName);
+        if(spawnPoint == null){
+            Debug.LogWarning("Can not found this spawnPointName: " + spawnPointName);
+            return null;
+        }
+
+        prefab.gameObject.SetActive(true);
+        prefab.position = spawnPoint.position;
+        return prefab;
+
+        // Transform newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+        // newObject.gameObject.SetActive(true);
+        // newObject.parent = this.holder;
+        // return newObject;
+    }
+
 }

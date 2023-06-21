@@ -5,6 +5,6 @@ using UnityEngine;
 public class PowerBoxTutorial : Tutorial
 {
     protected override void SetTutorialContent(){
-        this.tutorialContent = "Power box for shoot faster.";
+        this.tutorialContent = "Gun upgrade materials, shoot faster!";
     }
 }

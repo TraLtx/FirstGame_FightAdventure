@@ -16,6 +16,8 @@ public class Constant
     //====PLAYER_PROPERTIES_SAVE_NAME=====================
     public const string SAVE_CHAR = "CharacterIndex";
     public const string SAVE_COINS = "PlayerCoins";
+    public const string SAVE_BOX_GUN = "PlayerBoxGuns";
+    public const string SAVE_BOX_POWER = "PlayerBoxPowers";
     public const string SAVE_HEART_ITEMS = "HeartItem";
 
     //====SHOP_ITEM_SAVE_NAME=====================

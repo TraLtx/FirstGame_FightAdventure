@@ -12,14 +12,16 @@ public class BoxPowerCtrl : GameMonoBehaviour
     public Collider2D _Collider => this._collider;
 
     //---Child--------------------------------------------------
-    [SerializeField] protected Transform upgradePower;
-    public Transform UpgradePower => this.upgradePower;
+    // [SerializeField] protected Transform upgradePower;
+    // public Transform UpgradePower => this.upgradePower;
+    [SerializeField] protected BoxPowerSender boxPowerSender;
 
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadRigidbody();
         this.LoadCollider();
-        this.LoadUpgradePower();
+        // this.LoadUpgradePower();
+        this.LoadBoxPowerSender();
     }
 
     protected virtual void LoadRigidbody(){
@@ -32,8 +34,17 @@ public class BoxPowerCtrl : GameMonoBehaviour
         this._collider = GetComponent<Collider2D>();
     }
 
-    protected virtual void LoadUpgradePower(){
-        if(this.upgradePower != null) return;
-        this.upgradePower = transform.Find("UpgradePower");
+    // protected virtual void LoadUpgradePower(){
+    //     if(this.upgradePower != null) return;
+    //     this.upgradePower = transform.Find("UpgradePower");
+    // }
+    protected virtual void LoadBoxPowerSender(){
+        if(this.boxPowerSender != null) return;
+        this.boxPowerSender = transform.GetComponentInChildren<BoxPowerSender>();
+    }
+
+    //Public
+    public virtual void CollectThisBoxPower(Transform other){
+        this.boxPowerSender.SendPowerUpgradePoint(other);
     }
 }

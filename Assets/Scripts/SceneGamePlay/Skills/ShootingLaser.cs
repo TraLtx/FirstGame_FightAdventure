@@ -29,7 +29,7 @@ public class ShootingLaser : Shooting
         this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
     }
     protected override void SetShootDelayMax(){
-        this.shootDelayMax = 30f;
+        this.shootDelayMax = 5f;
         this.shootDelay = this.shootDelayMax;
         this.shootTimer = this.shootDelay;
     }

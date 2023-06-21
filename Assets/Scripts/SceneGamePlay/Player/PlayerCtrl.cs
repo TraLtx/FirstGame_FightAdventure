@@ -37,6 +37,8 @@ public class PlayerCtrl : GameMonoBehaviour
     public PlayerDangerEffect PlayerDangerEffect => this.playerDangerEffect;
 
     [SerializeField] protected PlayerCoinReceiver coinReceiver;
+    [SerializeField] protected PlayerBoxGunReceiver boxGunReceiver;
+    [SerializeField] protected PlayerBoxPowerReceiver boxPowerReceiver;
     [SerializeField] protected PlayerShield shield;
 
     protected override void LoadComponents(){
@@ -49,6 +51,8 @@ public class PlayerCtrl : GameMonoBehaviour
         this.LoadShootingPoint();
         this.LoadPlayerDangerEffect();
         this.LoadCoinReveiver();
+        this.LoadBoxGunReveiver();
+        this.LoadBoxPowerReveiver();
         this.LoadShield();
     }
 
@@ -92,6 +96,15 @@ public class PlayerCtrl : GameMonoBehaviour
         if(this.coinReceiver != null) return;
         this.coinReceiver = GetComponentInChildren<PlayerCoinReceiver>();
     }
+    protected virtual void LoadBoxGunReveiver(){
+        if(this.boxGunReceiver != null) return;
+        this.boxGunReceiver = GetComponentInChildren<PlayerBoxGunReceiver>();
+    }
+    protected virtual void LoadBoxPowerReveiver(){
+        if(this.boxPowerReceiver != null) return;
+        this.boxPowerReceiver = GetComponentInChildren<PlayerBoxPowerReceiver>();
+    }
+
     protected virtual void LoadShield(){
         if(this.shield != null) return;
         this.shield = GetComponentInChildren<PlayerShield>();
@@ -105,6 +118,12 @@ public class PlayerCtrl : GameMonoBehaviour
     }
     public virtual int GetCoinCollect(){
         return this.coinReceiver.GetCoinCollect();
+    }
+    public virtual int GetBoxGunCollect(){
+        return this.boxGunReceiver.GetBoxGunCollect();
+    }
+    public virtual int GetBoxPowerCollect(){
+        return this.boxPowerReceiver.GetBoxPowerCollect();
     }
     public virtual int GetShieldStatus(){
         if(this.shield == null) return 0;

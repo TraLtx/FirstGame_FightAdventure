@@ -28,5 +28,6 @@ public class DoorManager : GameMonoBehaviour
 
     public virtual void DoorOpenDone(){
         this._collider.isTrigger = true;
+        this.transform.tag = "NotPhysic";
     }
 }

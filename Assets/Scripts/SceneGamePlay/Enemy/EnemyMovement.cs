@@ -67,8 +67,10 @@ public class EnemyMovement : EnemyAbstract
 
     private void Flip()
     {
-        Vector3 localScale = transform.parent.localScale;
-        localScale.x *= -1f;
-        transform.parent.localScale = localScale;
+        transform.parent.Rotate(0f, 180f, 0f);
+
+        // Vector3 localScale = transform.parent.localScale;
+        // localScale.x *= -1f;
+        // transform.parent.localScale = localScale;
     }
 }

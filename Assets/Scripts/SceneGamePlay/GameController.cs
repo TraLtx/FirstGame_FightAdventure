@@ -194,9 +194,20 @@ public class GameController : GameMonoBehaviour
         int coinTotal = EnemySpawner.Instance.CountSpawnPoint();
         this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
         this.pnlPassLevel.ShowPanel();
-        int playerCoins = PlayerPrefs.GetInt("PlayerCoins");
+
+        int playerCoins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
         playerCoins += coins;
-        PlayerPrefs.SetInt("PlayerCoins", playerCoins);
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, playerCoins);
+
+        int boxGuns = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxGunCollect();
+        int playerBoxGuns = PlayerPrefs.GetInt(Constant.SAVE_BOX_GUN);
+        playerBoxGuns += boxGuns;
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, playerBoxGuns);
+
+        int boxPowers = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxPowerCollect();
+        int playerBoxPowers = PlayerPrefs.GetInt(Constant.SAVE_BOX_POWER);
+        playerBoxPowers += boxPowers;
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, playerBoxPowers);
 
         this.PlayParticle();
     }

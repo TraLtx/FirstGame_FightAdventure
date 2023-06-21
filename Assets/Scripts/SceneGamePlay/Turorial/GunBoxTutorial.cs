@@ -5,6 +5,6 @@ using UnityEngine;
 public class GunBoxTutorial : Tutorial
 {
     protected override void SetTutorialContent(){
-        this.tutorialContent = "Gun box, upgrade your gun, more damage!";
+        this.tutorialContent = "Gun upgrade materials, more damage!";
     }
 }

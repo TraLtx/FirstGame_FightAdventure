@@ -5,15 +5,15 @@ using UnityEngine;
 public abstract class CoinReceiver : GameMonoBehaviour
 {
     [SerializeField] protected int currentCoin = 0;
-    [SerializeField] protected CoinInventory coinInventory;
+    [SerializeField] protected CoinInventory collectInventory;
 
     protected override void LoadComponents(){
-        this.coinInventory = transform.parent.GetComponentInChildren<CoinInventory>();
+        this.collectInventory = transform.parent.GetComponentInChildren<CoinInventory>();
     }
 
     public virtual void AddCoin(int coinPoint){
         this.currentCoin += coinPoint;
-        this.coinInventory.UpdateInventory(this.currentCoin);
+        this.collectInventory.UpdateInventory(this.currentCoin);
     }
 
     public virtual int GetCoinCollect(){

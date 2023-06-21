@@ -12,14 +12,17 @@ public class BoxGunCtrl : GameMonoBehaviour
     public Collider2D _Collider => this._collider;
 
     //---Child--------------------------------------------------
-    [SerializeField] protected Transform upgradeGun;
-    public Transform UpgradeGun => this.upgradeGun;
+    // [SerializeField] protected Transform upgradeGun;
+    // public Transform UpgradeGun => this.upgradeGun;
+    [SerializeField] protected BoxGunSender boxGunSender;
+    // public BoxGunSender BoxGunSender => this.boxGunSender;
 
     protected override void LoadComponents(){
         base.LoadComponents();
         this.LoadRigidbody();
         this.LoadCollider();
-        this.LoadUpgradeGun();
+        // this.LoadUpgradeGun();
+        this.LoadBoxGunSender();
     }
 
     protected virtual void LoadRigidbody(){
@@ -32,8 +35,18 @@ public class BoxGunCtrl : GameMonoBehaviour
         this._collider = GetComponent<Collider2D>();
     }
 
-    protected virtual void LoadUpgradeGun(){
-        if(this.upgradeGun != null) return;
-        this.upgradeGun = transform.Find("UpgradeGun");
+    // protected virtual void LoadUpgradeGun(){
+    //     if(this.upgradeGun != null) return;
+    //     this.upgradeGun = transform.Find("UpgradeGun");
+    // }
+
+    protected virtual void LoadBoxGunSender(){
+        if(this.boxGunSender != null) return;
+        this.boxGunSender = transform.GetComponentInChildren<BoxGunSender>();
+    }
+
+    //Public
+    public virtual void CollectThisBoxGun(Transform other){
+        this.boxGunSender.SendGunUpgradePoint(other);
     }
 }
