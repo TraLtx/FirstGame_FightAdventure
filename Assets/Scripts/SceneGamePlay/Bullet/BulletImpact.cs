@@ -29,7 +29,13 @@ public class BulletImpact : GameMonoBehaviour
     }
     
     protected virtual void OnTriggerEnter2D(Collider2D other){
+
         if(other.tag == "NotPhysic" || other.tag == "Bullet" || bulletCtrl.Shooter == other.transform) return;
+
+        if(other.transform == bulletCtrl.Shooter) return;
+
+        Transform fx_impact = AnimationSpawner.Instance.Spawn(AnimationSpawner.bulletImpact, transform.position, transform.rotation);
+        fx_impact.gameObject.SetActive(true);
 
         bulletCtrl.SetMoveAble(false);
         bulletCtrl.DamSender.Send(other.transform);

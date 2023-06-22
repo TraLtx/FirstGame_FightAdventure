@@ -219,6 +219,7 @@ public class GameController : GameMonoBehaviour
 
         passLevelParticle.transform.position = new Vector3((topLeft.x + topRight.x)/2, topLeft.y, 0);
         passLevelParticle.Play();
+
     }
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");
