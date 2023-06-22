@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LaserGun : GameMonoBehaviour
 {
+    [SerializeField] protected DamSender damSender;
     [SerializeField] protected Transform shootPoint;
     [SerializeField] protected LineRenderer lineRenderer;
     [SerializeField] protected Transform startVFX;
@@ -13,10 +14,15 @@ public class LaserGun : GameMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadDamsender();
         this.LoadShootPoint();
         this.LoadLineRenderer();
         this.LoadStartVFX();
         this.LoadEndVFX();
+    }
+    protected virtual void LoadDamsender(){
+        if(this.damSender != null) return;
+        this.damSender = transform.GetComponentInChildren<DamSender>();
     }
     protected virtual void LoadShootPoint(){
         if(this.shootPoint != null) return;
@@ -35,9 +41,9 @@ public class LaserGun : GameMonoBehaviour
         this.endVFX = transform.Find("EndVFX");
     }
 
-    // protected virtual void Start(){
-    //     this.lineRenderer.enabled = true;
-    // }
+    protected virtual void Start(){
+        this.damSender.SetDamage(20);
+    }
     protected virtual void Update(){
         if(this.status == 1){
             this.Shoot();
@@ -51,7 +57,9 @@ public class LaserGun : GameMonoBehaviour
             Draw2DRay(shootPoint.position, _hit.point);
             this.endVFX.position = _hit.point;
             endVFX.gameObject.SetActive(true);
-            Debug.Log("Hit infor: " + _hit.transform.name);
+            if(_hit.transform.tag == "Player"){
+                this.damSender.Send(_hit.transform);
+            }
         }else{
             Draw2DRay(shootPoint.position, shootPoint.transform.right * fireDistance);
             endVFX.gameObject.SetActive(false);
