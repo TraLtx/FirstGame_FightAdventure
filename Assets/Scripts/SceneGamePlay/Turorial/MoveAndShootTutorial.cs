@@ -8,7 +8,7 @@ public class MoveAndShootTutorial : Tutorial
         this.tutorialContent = "Arrow keys to Move. J key to shoot!";
     }
 
-    protected override void SetShowTime(){
-        this.showTime = 6;
-    }
+    // protected override void SetShowTime(){
+    //     this.showTime = 6;
+    // }
 }

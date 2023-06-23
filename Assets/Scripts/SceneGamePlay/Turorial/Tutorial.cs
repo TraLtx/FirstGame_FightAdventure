@@ -7,9 +7,9 @@ public abstract class Tutorial : GameMonoBehaviour
 {
     [SerializeField] protected Collider2D _collider;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected Transform pnlInfor;
+    [SerializeField] protected InforPanel pnlInfor;
     [SerializeField] protected string tutorialContent;
-    [SerializeField] protected int showTime;
+    // [SerializeField] protected int showTime;
     [SerializeField] protected bool isDone;
 
     protected override void LoadComponents(){
@@ -17,7 +17,7 @@ public abstract class Tutorial : GameMonoBehaviour
         this.LoadAnimator();
         this.LoadPnlInfor();
         this.SetTutorialContent();
-        this.SetShowTime();
+        // this.SetShowTime();
         this.isDone = false;
         // transform.GetComponent<SpriteRenderer>().enabled = false;
     }
@@ -35,13 +35,20 @@ public abstract class Tutorial : GameMonoBehaviour
 
     protected virtual void LoadPnlInfor(){
         if(this.pnlInfor != null) return;
-        this.pnlInfor = GameObject.Find("MainCanvas").transform.Find("Pnl_Infor");
+        this.pnlInfor = GameObject.Find("MainCanvas").transform.Find("Pnl_Infor").GetComponent<InforPanel>();
     }
 
     protected virtual void ShowTutorial(){//Debug.Log("ShowTutor");
         this.pnlInfor.gameObject.SetActive(true);
-        this.pnlInfor.GetComponent<InforPanel>().SetActiveTime(this.showTime);
-        this.pnlInfor.GetComponent<InforPanel>().ShowPanel(this.tutorialContent);
+        // this.pnlInfor.GetComponent<InforPanel>().SetActiveTime(this.showTime);
+        this.pnlInfor.ShowPanel(this.tutorialContent);
+//
+    }
+
+    protected virtual void HideTutorial(){//Debug.Log("ShowTutor");
+        // this.pnlInfor.gameObject.SetActive(true);
+        // this.pnlInfor.GetComponent<InforPanel>().SetActiveTime(this.showTime);
+        this.pnlInfor.TurnOff();
 //
     }
 
@@ -53,10 +60,15 @@ public abstract class Tutorial : GameMonoBehaviour
         }
         this.ShowTutorial();
     }
-    
-    protected virtual void SetShowTime(){
-        this.showTime = 3;
+    protected virtual void OnTriggerExit2D(Collider2D other){
+        if(!(other.tag == "Player")) return;
+
+        this.HideTutorial();
     }
+    
+    // protected virtual void SetShowTime(){
+    //     this.showTime = 3;
+    // }
 
     protected abstract void SetTutorialContent();
 
