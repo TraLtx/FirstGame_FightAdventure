@@ -16,7 +16,7 @@ public class CameraFollowTarget : GameMonoBehaviour
         base.LoadComponents();
     }
 
-    protected override void Start(){
+    protected virtual void Start(){
         resetCamera = Camera.main.transform.position;
         this.SetMoveRange(GameController.screenMinPoint, GameController.screenMaxPoint);
     }

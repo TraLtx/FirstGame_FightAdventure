@@ -10,7 +10,7 @@ public class EnemyMovement : EnemyAbstract
     [SerializeField] protected int horizontalMove = 1; //1 mean move to right
     [SerializeField] protected bool canTurn = true;
  
-    protected override void Start(){
+    protected virtual void Start(){
         this.SetUpRandomDirect();
     }
     // Update is called once per frame

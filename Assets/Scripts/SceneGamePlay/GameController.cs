@@ -116,7 +116,7 @@ public class GameController : GameMonoBehaviour
         this.sceneChanger = GameObject.Find("SceneChanger").transform;
     }
     
-    protected override void Start(){
+    protected virtual void Start(){
         this.SpawnThisPlayer();
         this.SpawnEnemy();
         this.SpawnObject();

@@ -23,9 +23,9 @@ public class GameMonoBehaviour : MonoBehaviour
         // For override
     }
 
-    protected virtual void Start(){
+    // protected virtual void Start(){
         
-    }
+    // }
 
     protected virtual void ResetValue(){
     }

@@ -36,6 +36,12 @@ public class LevelMenuButtonClick : GameMonoBehaviour
     }
 
     //---SHOP--------------------------------
+    public virtual void BtnUpgradeGunClick(){
+        this.controller.UpgradeGun();
+    }
+    public virtual void BtnUpgradePowerClick(){
+        this.controller.UpgradePower();
+    }
     public virtual void BtnItemShieldClick(){
         this.controller.BuyShield();
     }

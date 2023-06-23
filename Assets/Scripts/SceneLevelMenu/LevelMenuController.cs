@@ -22,6 +22,7 @@ public class LevelMenuController : GameMonoBehaviour
     [SerializeField] protected Image imgChar;
 
     //---Shop---------------------------------------------
+    [SerializeField] protected ShopSkillContainer shopContainer;
     [SerializeField] protected int amountHeart;
     [SerializeField] protected Text txtAmountHeart;
 
@@ -38,12 +39,17 @@ public class LevelMenuController : GameMonoBehaviour
     }
 
     protected override void LoadComponents(){
+        PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, 1);
+        PlayerPrefs.SetInt(Constant.SAVE_POWER_LEVEL, 1);
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();
         this.LoadTxtBoxGuns();
         this.LoadTxtBoxPowers();
+
         this.LoadImgChar();
+
+        this.LoadShopContainer();
         this.LoadTxtAmountHeart();
         this.LoadItemUlti1();
         this.LoadItemUlti2();
@@ -77,6 +83,11 @@ public class LevelMenuController : GameMonoBehaviour
     protected virtual void LoadImgChar(){
         if(this.imgChar != null) return;
         this.imgChar = transform.Find("Canvas/Pnl_PageContent/Player/Imag_CharIcon").GetComponent<Image>();
+    }
+
+    protected virtual void LoadShopContainer(){
+        if(this.shopContainer != null) return;
+        this.shopContainer = transform.Find("Canvas/Pnl_PageContent/Shop/Skills/Skills_Container").GetComponent<ShopSkillContainer>();
     }
 
     protected virtual void LoadTxtAmountHeart(){
@@ -143,6 +154,7 @@ public class LevelMenuController : GameMonoBehaviour
     }
     public virtual void SwitchTabShop(){
         this.switchTab.ChangeToTab("Shop");
+        this.shopContainer.Reload();
         
         if(PlayerPrefs.GetInt(Constant.SAVE_CHAR) == 1){
             this.itemUlti_1.gameObject.SetActive(true);
@@ -163,9 +175,56 @@ public class LevelMenuController : GameMonoBehaviour
             PlayerPrefs.SetInt(Constant.SAVE_CHAR, 1);
             this.imgChar.sprite = Resources.Load<Sprite>("Sprites/Box_Char_Green");
         }
+
+        this.shopContainer.ResetSort();
     }
 
     //---Shop---------------------------------------------------
+
+    public virtual void UpgradeGun(){
+        Item_Gun itemGun = Item_Gun.Instance;
+        int currentGun = PlayerPrefs.GetInt(Constant.SAVE_GUN_LEVEL);
+        if(itemGun.GetCost() > this.boxGuns){
+            SystemNotify.Instance.ShowNotify("Not enough box upgrade!");
+            return;
+        }
+
+        this.boxGuns -= itemGun.GetCost();
+        currentGun ++;
+
+        Debug.Log("AfterBuy: coins-"+this.boxGuns+" gun-"+currentGun);
+
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, this.boxGuns);
+        PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, currentGun);
+
+        // Debug.Log("???---"+PlayerPrefs.GetInt(Constant.SAVE_BOX_GUN));
+        this.UpdateTxtCoin();
+        
+        itemGun.SetNewItemData();
+
+    }
+
+    public virtual void UpgradePower(){
+        Item_Power itemPower = Item_Power.Instance;
+        int currentPower = PlayerPrefs.GetInt(Constant.SAVE_POWER_LEVEL);
+        if(itemPower.GetCost() > this.boxPowers){
+            SystemNotify.Instance.ShowNotify("Not enough box upgrade!");
+            return;
+        }
+
+        this.boxPowers -= itemPower.GetCost();
+        currentPower ++;
+
+        Debug.Log("AfterBuy: coins-"+this.boxPowers+" power-"+currentPower);
+
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, this.boxPowers);
+        PlayerPrefs.SetInt(Constant.SAVE_POWER_LEVEL, currentPower);
+        this.UpdateTxtCoin();
+        
+        itemPower.SetNewItemData();
+
+    }
+
     public virtual void BuyShield(){
         ItemShield itemShield = ItemShield.Instance;
         int currentShield = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);

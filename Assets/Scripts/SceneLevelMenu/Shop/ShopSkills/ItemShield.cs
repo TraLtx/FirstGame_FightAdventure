@@ -14,11 +14,11 @@ public class ItemShield : ShopItem
         instance = this;
     }
 
-    protected virtual void Start()
-    {
-        this.InitData();
-        this.SetNewItemData();
-    }
+    // protected virtual void Start()
+    // {
+    //     this.InitData();
+    //     this.SetNewItemData();
+    // }
 
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);
@@ -26,6 +26,19 @@ public class ItemShield : ShopItem
     }
 
     protected override void InitData(){
+
+        this.itemDataList.Clear();
+        
+        if(transform.Find("LevelDataHolder") != null){
+            Debug.Log("Exist Data!");
+            Transform levelDataholder = transform.Find("LevelDataHolder");
+            foreach (Transform data in levelDataholder)
+            {
+                this.itemDataList.Add(data.GetComponent<ItemShopData>());
+            }
+            return;
+        }
+
         this.levelMax = 5;
 
         int startLevel = 1;
@@ -78,7 +91,7 @@ public class ItemShield : ShopItem
         }
 
         this.pnlSoldOut.gameObject.SetActive(true);
-
+        this.transform.parent.GetComponent<ContainerHorizontalHolder>().NotifyChangePlace();
     }
     
 }

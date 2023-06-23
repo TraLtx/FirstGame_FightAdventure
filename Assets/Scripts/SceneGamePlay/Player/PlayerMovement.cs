@@ -39,7 +39,7 @@ public class PlayerMovement : PlayerAbstract
         this.maxMoveRange = new Vector2(max.x - padding, max.y - padding);
     }
 
-    protected override void Start(){
+    protected virtual void Start(){
         this.SetMoveRange(GameController.screenMinPoint, GameController.screenMaxPoint);
     }
 

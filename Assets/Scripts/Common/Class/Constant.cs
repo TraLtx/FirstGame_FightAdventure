@@ -21,6 +21,8 @@ public class Constant
     public const string SAVE_HEART_ITEMS = "HeartItem";
 
     //====SHOP_ITEM_SAVE_NAME=====================
+    public const string SAVE_GUN_LEVEL = "GunLevel";
+    public const string SAVE_POWER_LEVEL = "PowerLevel";
     public const string SAVE_SHIELD_LEVEL = "ShieldLevel";
     public const string SAVE_ULTI_1_LEVEL = "Ulti1Level";
     public const string SAVE_ULTI_2_LEVEL = "Ulti2Level";

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemUlti2 : ShopItem
+public class Item_Gun : ShopItem
 {
-    protected static ItemUlti2 instance;
-    public static ItemUlti2 Instance {get => instance;}
+    protected static Item_Gun instance;
+    public static Item_Gun Instance {get => instance;}
 
     protected override void Awake(){
         base.Awake();
@@ -18,18 +18,20 @@ public class ItemUlti2 : ShopItem
     // {
     //     this.InitData();
     //     this.SetNewItemData();
-        
-    //     // Now I use this fast way, but it can change by use foreach
-    //     // this.SetTxtCost(itemDataList[this.level].Cost.ToString());
-    //     // this.SetTxtBuy("BUY");
     // }
 
     protected override void LoadPlayerData(){
-        this.level = PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL);
-        Debug.Log("Ulti_Save: "+this.level);
+        this.level = PlayerPrefs.GetInt(Constant.SAVE_GUN_LEVEL);
+        // if(this.level < 2){
+        //     this.level = 2;
+        //     PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, 2);
+        // }
+        Debug.Log("Gun_Level_Save: " + this.level);
+        if(this.level <= 0) this.isSale = false;
+        else this.isSale = true;
     }
 
-    protected override void InitData(){
+    protected override void InitData(){Debug.Log("===METHOD: "+transform.name+" InitData()");
 
         this.itemDataList.Clear();
         
@@ -53,7 +55,7 @@ public class ItemUlti2 : ShopItem
         GameObject itemLevel_1 = new GameObject("ItemLevel_1");
         itemLevel_1.transform.SetParent(dataholder.transform);
         ItemShopData itemData = itemLevel_1.AddComponent<ItemShopData>();
-        itemData.CreateItemShopData(startLevel, 15, "Unlock Ulti");
+        itemData.CreateItemShopData(startLevel, 15, "UnLock");
         this.itemDataList.Add(itemData);
 
         GameObject itemLevel_2 = new GameObject("ItemLevel_2");
@@ -88,10 +90,13 @@ public class ItemUlti2 : ShopItem
     }
 
     public override void CheckIsSoldOut(){
-        if(this.level < this.levelMax) return;
+        //this.LoadPlayerData();
+        //Debug.Log("shiled. level: "+this.level+", max: "+this.levelMax);
+        if(this.level < this.levelMax){
+            return;
+        }
 
         this.pnlSoldOut.gameObject.SetActive(true);
-        this.transform.parent.parent.GetComponent<ContainerHorizontalHolder>().NotifyChangePlace();
-
+        this.transform.parent.GetComponent<ContainerHorizontalHolder>().NotifyChangePlace();
     }
 }

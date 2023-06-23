@@ -14,15 +14,15 @@ public class ItemUlti1 : ShopItem
         instance = this;
     }
 
-    protected virtual void Start()
-    {
-        this.InitData();
-        this.SetNewItemData();
+    // protected virtual void Start()
+    // {
+    //     this.InitData();
+    //     this.SetNewItemData();
         
-        // Now I use this fast way, but it can change by use foreach
-        // this.SetTxtCost(itemDataList[this.level].Cost.ToString());
-        // this.SetTxtBuy("BUY");
-    }
+    //     // Now I use this fast way, but it can change by use foreach
+    //     // this.SetTxtCost(itemDataList[this.level].Cost.ToString());
+    //     // this.SetTxtBuy("BUY");
+    // }
 
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_ULTI_1_LEVEL);
@@ -30,6 +30,19 @@ public class ItemUlti1 : ShopItem
     }
 
     protected override void InitData(){
+
+        this.itemDataList.Clear();
+        
+        if(transform.Find("LevelDataHolder") != null){
+            Debug.Log("Exist Data!");
+            Transform levelDataholder = transform.Find("LevelDataHolder");
+            foreach (Transform data in levelDataholder)
+            {
+                this.itemDataList.Add(data.GetComponent<ItemShopData>());
+            }
+            return;
+        }
+
         this.levelMax = 5;
 
         int startLevel = 1;
@@ -78,6 +91,7 @@ public class ItemUlti1 : ShopItem
         if(this.level < this.levelMax) return;
 
         this.pnlSoldOut.gameObject.SetActive(true);
+        this.transform.parent.parent.GetComponent<ContainerHorizontalHolder>().NotifyChangePlace();
 
     }
 }
