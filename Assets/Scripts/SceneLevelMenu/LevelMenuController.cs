@@ -33,7 +33,12 @@ public class LevelMenuController : GameMonoBehaviour
     // [SerializeField] protected List<ShopItem> items;
 
     protected override void Awake(){
-        base.Awake();PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
+        base.Awake();
+        
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, 1000);
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, 1000);
+
         if(instance != null) return;
         instance = this;
     }

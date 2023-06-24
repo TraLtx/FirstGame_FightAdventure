@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     private bool isBtnFight = false;
     private bool isUlti = false;
     private bool isShield = false;
+    private bool isHeal = false;
 
     void Awake()
     {
@@ -40,6 +41,9 @@ public class InputManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.H)) isShield = true;
         if(Input.GetKeyUp(KeyCode.H)) isShield = false;
+
+        if(Input.GetKeyDown(KeyCode.Y)) isHeal = true;
+        if(Input.GetKeyUp(KeyCode.Y)) isHeal = false;
     }
 
     
@@ -68,6 +72,10 @@ public class InputManager : MonoBehaviour
         return isShield;
     }
 
+    public bool GetHealStatus(){
+        return isHeal;
+    }
+
     //-------------------------------------------
 
     public void ClickBtnRunLeft(){
@@ -93,6 +101,10 @@ public class InputManager : MonoBehaviour
     public void ClickBtnShield(){
         isShield = true;
     }
+
+    public void ClickBtnHeart(){
+        isHeal = true;
+    }
     //---------------------------------------------
 
     public void OutClickBtnRunLeft(){
@@ -117,5 +129,9 @@ public class InputManager : MonoBehaviour
 
     public void OutClickBtnShield(){
         isShield = false;
+    }
+
+    public void OutClickBtnHeart(){
+        isHeal = false;
     }
 }

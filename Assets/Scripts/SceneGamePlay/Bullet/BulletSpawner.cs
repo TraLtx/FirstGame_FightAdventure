@@ -16,4 +16,5 @@ public class BulletSpawner : SpawnerWithPool
     public static string bulletOne = "Bullet_1";
     public static string bulletTwo = "Bullet_2";
     public static string bulletLaser = "Bullet_Laser";
+    public static string grenade = "Grenade";
 }

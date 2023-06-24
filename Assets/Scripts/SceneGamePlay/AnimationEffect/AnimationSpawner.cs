@@ -13,4 +13,5 @@ public class AnimationSpawner : SpawnerWithPool
         instance = this;
     }
     public static string bulletImpact = "Effect_BulletImpact";
+    public static string grenadeBoom = "Effect_GrenadeBoom";
 }
