@@ -29,7 +29,7 @@ public class PlayerShooting : Shooting
         this.shootPowerMax = 5;
     }
     protected override void SetBullet(){
-        this.bulletName = BulletSpawner.grenade;
+        this.bulletName = BulletSpawner.bulletOne;
     }
     protected override void SetShootingPoint(){
         this.shootingPoint = this.playerCtrl.GetShootingPoint();
@@ -66,10 +66,12 @@ public class PlayerShooting : Shooting
 
     protected virtual void LoadPlayerDataGun(){
         this.shootDam = PlayerPrefs.GetInt(Constant.SAVE_GUN_LEVEL);
+        if(this.shootDam < 1) this.shootDam = 1;
     }
 
     protected virtual void LoadPlayerDataPower(){
         this.shootPower = PlayerPrefs.GetInt(Constant.SAVE_POWER_LEVEL);
+        if(this.shootPower < 1) this.shootDam = 1;
     }
 
     public override void AddShootDam(int dam){

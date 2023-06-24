@@ -27,6 +27,9 @@ public class ItemUlti1 : ShopItem
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_ULTI_1_LEVEL);
         Debug.Log("Ulti_Save: "+this.level);
+        if(this.level <= 0) this.isSale = false;
+        else this.isSale = true;
+        Debug.Log("Is sale: " + this.isSale);
     }
 
     protected override void InitData(){

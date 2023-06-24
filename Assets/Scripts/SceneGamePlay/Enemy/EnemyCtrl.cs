@@ -18,11 +18,13 @@ public class EnemyCtrl : GameMonoBehaviour
     [SerializeField] protected EnemyAnimation animation;
 
     //---Variable-------------------------------------------------------------------
-    [SerializeField] protected Transform thisSpawnPoint;
-    public Transform ThisSpawnPoint => this.thisSpawnPoint;
+    // [SerializeField] protected Transform thisSpawnPoint;
+    // public Transform ThisSpawnPoint => this.thisSpawnPoint;
     
     [SerializeField] protected bool isSeePlayer = false;
     public bool IsSeePlayer {set => this.isSeePlayer = value; get => this.isSeePlayer;}
+    [SerializeField] protected bool canShootPlayer = false;
+    public bool CanShootPlayer {set => this.canShootPlayer = value; get => this.canShootPlayer;}
 
     [SerializeField] protected bool isTouchEnemy = false;
     public bool IsTouchEnemy {set => this.isTouchEnemy = value; get => this.isTouchEnemy;}
@@ -65,9 +67,9 @@ public class EnemyCtrl : GameMonoBehaviour
     public virtual Transform GetShootingPoint(){
         return this.enemyShootingPoint;
     }
-    public virtual void SetThisSpawnPoint(Transform spawnPoint){
-        this.thisSpawnPoint = spawnPoint;
-    }
+    // public virtual void SetThisSpawnPoint(Transform spawnPoint){
+    //     this.thisSpawnPoint = spawnPoint;
+    // }
 
 
     public virtual void Die(){

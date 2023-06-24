@@ -35,17 +35,15 @@ public class LevelMenuController : GameMonoBehaviour
     protected override void Awake(){
         base.Awake();
         
-        PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
-        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, 1000);
-        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, 1000);
+        // PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
+        // PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, 1000);
+        // PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, 1000);
 
         if(instance != null) return;
         instance = this;
     }
 
     protected override void LoadComponents(){
-        PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, 1);
-        PlayerPrefs.SetInt(Constant.SAVE_POWER_LEVEL, 1);
         this.LoadSceneChanger();
         this.LoadSwitchTab();
         this.LoadTxtCoins();

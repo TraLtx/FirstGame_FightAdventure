@@ -11,7 +11,7 @@ public class GrenadeMovement : MonoBehaviour
     }
 
     public virtual void Move(){
-        this.transform.GetComponent<Rigidbody2D>().AddForce((new Vector2(transform.right.x, 1)) * 5f, ForceMode2D.Impulse);
+        this.transform.GetComponent<Rigidbody2D>().AddForce((new Vector2(transform.right.x, 1f)) * 6f, ForceMode2D.Impulse);
     }
 
     // void FixedUpdate(){

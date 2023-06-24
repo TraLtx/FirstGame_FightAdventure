@@ -34,6 +34,8 @@ public class BulletImpact : GameMonoBehaviour
 
         if(other.transform == bulletCtrl.Shooter) return;
 
+        if(bulletCtrl.Shooter == null || bulletCtrl.Shooter.tag == other.tag) return;
+
         Transform fx_impact = AnimationSpawner.Instance.Spawn(AnimationSpawner.bulletImpact, transform.position, transform.rotation);
         fx_impact.gameObject.SetActive(true);
 

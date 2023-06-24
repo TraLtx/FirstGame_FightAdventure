@@ -22,15 +22,15 @@ public class Item_Power : ShopItem
 
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_POWER_LEVEL);
-        // if(this.level < 2){
-        //     this.level = 2;
-        //     PlayerPrefs.SetInt(Constant.SAVE_POWER_LEVEL, 2);
-        // }
+        if(this.level < 1){
+            this.level = 1;
+            PlayerPrefs.SetInt(Constant.SAVE_POWER_LEVEL, 1);
+        }
         Debug.Log("Power_Level_Save: " + this.level);
 
-        if(this.level <= 0) this.isSale = false;
-        else this.isSale = true;
-        Debug.Log("Is sale: " + this.isSale);
+        // if(this.level <= 0) this.isSale = false;
+        // else this.isSale = true;
+        // Debug.Log("Is sale: " + this.isSale);
     }
 
     protected override void InitData(){

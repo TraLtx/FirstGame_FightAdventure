@@ -63,7 +63,7 @@ public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
     }
     protected override void OnDead(){
         Destroy(transform.parent.gameObject);
-        GameController.Instance.ShowDieMenu();
+        GameController.Instance.Die();
     }
 
     protected override void LoadHpBar(){

@@ -25,7 +25,7 @@ public class EnemySpawner : SpawnerNormal
         foreach (Transform point in this.spawnPoints)
         {
             Transform newEnemy = Spawn(enemy, point.name);
-            newEnemy.GetComponent<EnemyCtrl>().SetThisSpawnPoint(point);
+            // newEnemy.GetComponent<EnemyCtrl>().SetThisSpawnPoint(point);
             Physics2D.IgnoreCollision(GameController.Instance.ThisPlayer.GetComponent<Collider2D>(),
             newEnemy.GetComponent<Collider2D>());
         }

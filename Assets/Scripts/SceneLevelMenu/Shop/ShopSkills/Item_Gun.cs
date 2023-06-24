@@ -22,13 +22,13 @@ public class Item_Gun : ShopItem
 
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_GUN_LEVEL);
-        // if(this.level < 2){
-        //     this.level = 2;
-        //     PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, 2);
-        // }
+        if(this.level < 1){
+            this.level = 1;
+            PlayerPrefs.SetInt(Constant.SAVE_GUN_LEVEL, 1);
+        }
         Debug.Log("Gun_Level_Save: " + this.level);
-        if(this.level <= 0) this.isSale = false;
-        else this.isSale = true;
+        // if(this.level <= 0) this.isSale = false;
+        // else this.isSale = true;
     }
 
     protected override void InitData(){Debug.Log("===METHOD: "+transform.name+" InitData()");

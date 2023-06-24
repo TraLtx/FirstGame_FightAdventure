@@ -163,6 +163,26 @@ public class GameController : GameMonoBehaviour
     }
 
     //======PUBLIC METHODs===============================================================
+    public virtual void Die(){Debug.Log("Die Then Save Data=========================");
+
+        int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
+        int playerCoins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
+        playerCoins += coins;
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, playerCoins);
+
+        int boxGuns = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxGunCollect();
+        int playerBoxGuns = PlayerPrefs.GetInt(Constant.SAVE_BOX_GUN);
+        playerBoxGuns += boxGuns;
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, playerBoxGuns);
+
+        int boxPowers = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxPowerCollect();
+        int playerBoxPowers = PlayerPrefs.GetInt(Constant.SAVE_BOX_POWER);
+        playerBoxPowers += boxPowers;
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, playerBoxPowers);
+
+        this.ShowDieMenu();
+    }
+
     public virtual void ShowDieMenu(){
         this.pnlYouDie.gameObject.SetActive(true);
     }

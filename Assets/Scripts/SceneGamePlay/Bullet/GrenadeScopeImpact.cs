@@ -37,8 +37,11 @@ public class GrenadeScopeImpact : GameMonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other){//Debug.Log("Hit Something");
+        // if(other.tag == "Player"){Debug.Log("Hit Player ==> BOOM");
+        //     grenadeCtrl.Boom();
+        // }
 
-        if(this.isActive == false) return;
+        if(this.isActive == false || grenadeCtrl.Shooter == other.transform) return;
 
         Debug.Log("Boom Something");
 

@@ -45,14 +45,14 @@ public class PlatformMove : GameMonoBehaviour
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D other){
-        // if(!(other.collider.tag == "Player")) return;
+        if(!(other.collider.tag == "Player")) return;
         this.targetParent = other.transform.parent;
         other.transform.parent = transform;
         // other.gameObject.transform.SetParent(this.transform);
     }
 
     protected virtual void OnCollisionExit2D(Collision2D other){
-        // if(!(other.collider.tag == "Player")) return;
+        if(!(other.collider.tag == "Player")) return;
         other.transform.parent = this.targetParent;
         // other.gameObject.transform.SetParent(this.targetParent);
     }

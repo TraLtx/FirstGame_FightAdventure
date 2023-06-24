@@ -90,7 +90,7 @@ public abstract class Shooting : GameMonoBehaviour
         newBullet.GetComponent<BulletCtrl>().ResetBorn();
 
         //DELETEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        if(newBullet.GetComponent<GrenadeCtrl>() != null) newBullet.GetComponent<GrenadeCtrl>().ResetBorn();
+        //if(newBullet.GetComponent<GrenadeCtrl>() != null) newBullet.GetComponent<GrenadeCtrl>().ResetBorn();
     }
     public virtual void AddShootDam(int dam){
         this.shootDam += dam;

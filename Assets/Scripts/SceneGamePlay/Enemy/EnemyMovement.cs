@@ -9,8 +9,11 @@ public class EnemyMovement : EnemyAbstract
     [SerializeField] protected float moveDistance = 0;
     [SerializeField] protected int horizontalMove = 1; //1 mean move to right
     [SerializeField] protected bool canTurn = true;
+
+    [SerializeField] protected Vector3 thisSpawnPoint;
  
     protected virtual void Start(){
+        this.thisSpawnPoint = transform.parent.position;
         this.SetUpRandomDirect();
     }
     // Update is called once per frame
@@ -31,10 +34,16 @@ public class EnemyMovement : EnemyAbstract
                 this.canTurn = true;
                 this.Redirect();
             }
+
+            enemyCtrl.CanShootPlayer = true;
+
             return;
+        }else{
+            enemyCtrl.CanShootPlayer = false;
         }
 
-        this.moveDistance = Vector3.Distance(transform.parent.position, enemyCtrl.ThisSpawnPoint.position);
+        // this.moveDistance = Vector3.Distance(transform.parent.position, enemyCtrl.ThisSpawnPoint.position);
+        this.moveDistance = Vector3.Distance(transform.parent.position, this.thisSpawnPoint);
 
         if(moveDistance > moveRange){
             this.Redirect();

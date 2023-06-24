@@ -32,7 +32,7 @@ public class EnemyShooting : Shooting
         this.shootingPoint = this.enemyCtrl.GetShootingPoint();
     }
     protected override bool GetShootAble(){
-        if(!enemyCtrl.IsSeePlayer || enemyCtrl.IsDie) return false;
+        if(!enemyCtrl.CanShootPlayer || enemyCtrl.IsDie) return false;
 
         return true;
     }
