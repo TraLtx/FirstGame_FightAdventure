@@ -16,7 +16,10 @@ public abstract class ThrowGrenade : GameMonoBehaviour
     protected abstract void SetShootingPoint();
     protected abstract bool GetShootAble();
 
+    protected abstract void ControlShootingPoint();
+
     protected virtual void FixedUpdate(){
+        this.ControlShootingPoint();
 
         if(this.shootTimer < this.shootDelay){
             this.shootTimer += Time.fixedDeltaTime;
@@ -33,12 +36,12 @@ public abstract class ThrowGrenade : GameMonoBehaviour
         this.shootTimer = 0;
         // this.UpdateSlider();
 
-        Vector3 modelScale = transform.parent.localScale;
+        // Vector3 modelScale = transform.parent.localScale;
 
-        Quaternion rotation = new Quaternion(0,0,0,1);
-        if(modelScale.x < 1){
-            rotation = new Quaternion(0,0,180,1);
-        }
+        // Quaternion rotation = new Quaternion(0,0,0,1);
+        // if(modelScale.x < 1){
+        //     rotation = new Quaternion(0,0,180,1);
+        // }
         Transform newBullet = BulletSpawner.Instance.Spawn(BulletSpawner.grenade, this.shootingPoint.position, this.shootingPoint.rotation);
         if(newBullet == null){
             Debug.LogWarning("Can not Spawn Grenade");

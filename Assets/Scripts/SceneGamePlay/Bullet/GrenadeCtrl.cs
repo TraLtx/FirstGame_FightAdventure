@@ -6,6 +6,8 @@ public class GrenadeCtrl : GameMonoBehaviour
 {
     [SerializeField] protected Transform shooter;
     public Transform Shooter{get => this.shooter;}
+    [SerializeField] protected string shooterTag;
+    public string ShooterTag{get => this.shooterTag;}
 
     [SerializeField] protected DamSender damSender;
     public DamSender DamSender => this.damSender;
@@ -39,7 +41,8 @@ public class GrenadeCtrl : GameMonoBehaviour
     // Start is called before the first frame update
     // void Start()
     // {
-    //     StartCoroutine(this.Countdown());
+    //     // StartCoroutine(this.Countdown());
+    //     Physics2D.IgnoreCollision(GameController.Instance.ThisPlayer.GetComponent<Collider2D>(), this._collider);
     // }
 
     protected virtual void FixedUpdate(){
@@ -60,6 +63,7 @@ public class GrenadeCtrl : GameMonoBehaviour
 
     public virtual void SetShooter(Transform shooter){
         this.shooter = shooter;
+        this.shooterTag = this.shooter.tag;
     }
 
     // protected virtual void Countdown(){

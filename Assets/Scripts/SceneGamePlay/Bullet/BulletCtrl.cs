@@ -13,6 +13,8 @@ public class BulletCtrl : GameMonoBehaviour
 
     [SerializeField] protected Transform shooter;
     public Transform Shooter{get => this.shooter;}
+    [SerializeField] protected string shooterTag;
+    public string ShooterTag{get => this.shooterTag;}
 
     [SerializeField] protected bool isMoveAble;
 
@@ -40,6 +42,7 @@ public class BulletCtrl : GameMonoBehaviour
 
     public virtual void SetShooter(Transform shooter){
         this.shooter = shooter;
+        this.shooterTag = this.shooter.tag;
     }
 
     public virtual void SetDamage(int dam){

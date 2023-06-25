@@ -25,6 +25,8 @@ public class EnemyCtrl : GameMonoBehaviour
     public bool IsSeePlayer {set => this.isSeePlayer = value; get => this.isSeePlayer;}
     [SerializeField] protected bool canShootPlayer = false;
     public bool CanShootPlayer {set => this.canShootPlayer = value; get => this.canShootPlayer;}
+    [SerializeField] protected float targetDistance = 0;
+    public float TargetDistance {set => this.targetDistance = value; get => this.targetDistance;}
 
     [SerializeField] protected bool isTouchEnemy = false;
     public bool IsTouchEnemy {set => this.isTouchEnemy = value; get => this.isTouchEnemy;}

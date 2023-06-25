@@ -30,11 +30,10 @@ public class BulletImpact : GameMonoBehaviour
     
     protected virtual void OnTriggerEnter2D(Collider2D other){
 
-        if(other.tag == "NotPhysic" || other.tag == "Bullet" || bulletCtrl.Shooter == other.transform) return;
-
-        if(other.transform == bulletCtrl.Shooter) return;
-
-        if(bulletCtrl.Shooter == null || bulletCtrl.Shooter.tag == other.tag) return;
+        if(other.tag == "NotPhysic" || 
+        other.tag == "Bullet" || 
+        // bulletCtrl.Shooter == other.transform || 
+        other.CompareTag(bulletCtrl.ShooterTag)) return;
 
         Transform fx_impact = AnimationSpawner.Instance.Spawn(AnimationSpawner.bulletImpact, transform.position, transform.rotation);
         fx_impact.gameObject.SetActive(true);

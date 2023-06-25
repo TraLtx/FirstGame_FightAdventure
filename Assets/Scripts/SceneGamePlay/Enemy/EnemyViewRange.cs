@@ -13,6 +13,7 @@ public class EnemyViewRange : EnemyAbstract
         this.playerTransformDirection = other.transform.position.x - transform.parent.position.x;
 
         enemyCtrl.IsSeePlayer = true;
+        enemyCtrl.TargetDistance = Vector3.Distance(this.transform.parent.position, other.transform.position);
     }
 
     protected void OnTriggerExit2D(Collider2D other){

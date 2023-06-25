@@ -18,6 +18,11 @@ public class GrenadeScopeImpact : GameMonoBehaviour
     //     if(this._collider != null) return;
     //     this._collider = GetComponent<Collider2D>();
     // }
+    // void Start()
+    // {
+    //     // StartCoroutine(this.Countdown());
+    //     Physics2D.IgnoreCollision(GameController.Instance.ThisPlayer.GetComponent<Collider2D>(), this.transform.GetComponent<Collider2D>());
+    // }
 
     protected override void LoadComponents()
     {
@@ -41,7 +46,7 @@ public class GrenadeScopeImpact : GameMonoBehaviour
         //     grenadeCtrl.Boom();
         // }
 
-        if(this.isActive == false || grenadeCtrl.Shooter == other.transform) return;
+        if(this.isActive == false || other.CompareTag(grenadeCtrl.ShooterTag)) return;
 
         Debug.Log("Boom Something");
 
