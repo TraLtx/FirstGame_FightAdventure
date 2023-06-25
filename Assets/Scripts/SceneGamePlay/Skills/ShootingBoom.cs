@@ -29,7 +29,7 @@ public class ShootingBoom : Shooting
         this.shootTimer = this.shootDelay;
     }
     protected override void SetDelayUp(){
-        this.delayUp = 0.15f;
+        this.delayUp = 5f;
     }
     protected override void SetShootDelayMin(){
         this.shootDelayMin = 0.1f;
@@ -79,10 +79,20 @@ public class ShootingBoom : Shooting
 
         this.UpdateSlider();
 
+        this.LoadPlayerDataUlti_2();
+        this.shootDelay = this.shootDelayMax - this.shootPower * this.delayUp;
+
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);
         // this.shootDelay = 1f - this.shootPower * 0.15f;
     }
+
+    protected virtual void LoadPlayerDataUlti_2(){
+        this.shootDam = PlayerPrefs.GetInt(Constant.SAVE_ULTI_2_LEVEL);
+        this.shootPower = this.shootDam;
+    }
+
+
 
     // public virtual void SetDam(){
     //     //

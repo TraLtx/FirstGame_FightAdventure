@@ -34,10 +34,6 @@ public class LevelMenuController : GameMonoBehaviour
 
     protected override void Awake(){
         base.Awake();
-        
-        // PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
-        // PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, 1000);
-        // PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, 1000);
 
         if(instance != null) return;
         instance = this;
@@ -136,6 +132,11 @@ public class LevelMenuController : GameMonoBehaviour
     //===PUBLIC METHODs===========================================
     public virtual void GoToMainMenu(){
         this.sceneChanger.ChangeScene(Constant.SCENE_MAIN_MENU);
+    }
+
+    public virtual void ChooseLevel(int levelId){
+        string levelName = "Level" + levelId;
+        this.GoToLevel(levelName);
     }
 
     public virtual void GoToLevel(string levelName){

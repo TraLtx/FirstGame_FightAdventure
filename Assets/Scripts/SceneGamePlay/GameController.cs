@@ -22,8 +22,7 @@ public class GameController : GameMonoBehaviour
     public Tilemap TileBackGround {get => this.tileBackGround;}
 
     [SerializeField] protected Transform pnlYouDie;
-    public Transform PnlYouDie => this.pnlYouDie;
-
+    [SerializeField] protected PanelDie pnlDie;
     [SerializeField] protected PausePanel pnlPause;
     [SerializeField] protected PassLevelPanel pnlPassLevel;
     [SerializeField] protected ParticleSystem passLevelParticle;
@@ -31,6 +30,7 @@ public class GameController : GameMonoBehaviour
 
     // [SerializeField] protected GameObject playerServerPrefab;
     // [SerializeField] protected GameObject playerClientPrefab;
+
 
     //---Variable--------------------------------------------------------------
 
@@ -63,6 +63,7 @@ public class GameController : GameMonoBehaviour
         base.LoadComponents();
         this.LoadTileBackGround();
         this.LoadPnlYouDie();
+        this.LoadPnlDie();
         this.LoadPnlPause();
         this.LoadPnlPassLevel();
         this.LoadParticlePassLevel();
@@ -75,25 +76,29 @@ public class GameController : GameMonoBehaviour
         if(this.tileBackGround != null) return;
         this.tileBackGround = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
     }
-
     protected virtual void LoadPnlYouDie(){
         this.pnlYouDie = GameObject.Find("MainCanvas").transform.Find("Pnl_YouDie");
+        this.pnlYouDie.gameObject.SetActive(true);
+    }
+    protected virtual void LoadPnlDie(){
+        if(this.pnlDie == null){
+            this.pnlDie = GameObject.Find("MainCanvas").GetComponentInChildren<PanelDie>();
+        }
         this.pnlYouDie.gameObject.SetActive(false);
     }
-
     protected virtual void LoadPnlPause(){
         if(this.pnlPause != null) return;
         this.pnlPause = GameObject.Find("MainCanvas").transform.Find("Pnl_Pause").GetComponent<PausePanel>();
     }
 
     protected virtual void LoadPnlPassLevel(){
-        if(this.passLevelParticle != null) return;
-        this.passLevelParticle = GameObject.Find("PassLevelParticle").GetComponent<ParticleSystem>();
+        if(this.pnlPassLevel != null) return;
+        this.pnlPassLevel = GameObject.Find("MainCanvas").GetComponentInChildren<PassLevelPanel>();
     }
 
     protected virtual void LoadParticlePassLevel(){
-        if(this.pnlPassLevel != null) return;
-        this.pnlPassLevel = GameObject.Find("MainCanvas").GetComponentInChildren<PassLevelPanel>();
+        if(this.passLevelParticle != null) return;
+        this.passLevelParticle = GameObject.Find("PassLevelParticle").GetComponent<ParticleSystem>();
     }
 
     protected virtual void LoadScreenRange(){
@@ -119,6 +124,7 @@ public class GameController : GameMonoBehaviour
     protected virtual void Start(){
         this.SpawnThisPlayer();
         this.SpawnEnemy();
+        this.SpawnEnemyGrenade();
         this.SpawnObject();
         // Physics2D.IgnoreCollision(this.playerPrefab.GetComponent<Collider2D>(), this.enemyPrefab.GetComponent<Collider2D>(), true);
     }
@@ -155,6 +161,9 @@ public class GameController : GameMonoBehaviour
     protected virtual void SpawnEnemy(){
         EnemySpawner.Instance.SpawnEnemyAllPoints(); 
     }
+    protected virtual void SpawnEnemyGrenade(){
+        EnemyGrenadeSpawner.Instance.SpawnEnemyAllPoints(); 
+    }
 
     protected virtual void SpawnObject(){
         BoxGunSpawner.Instance.SpawnBoxGunAllPoints(); 
@@ -180,10 +189,13 @@ public class GameController : GameMonoBehaviour
         playerBoxPowers += boxPowers;
         PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, playerBoxPowers);
 
-        this.ShowDieMenu();
+        this.ShowPanelYouDie();
+        this.pnlDie.SetCoinsCollect(coins);
+        this.pnlDie.SetBoxGunsCollect(boxGuns);
+        this.pnlDie.SetBoxPowersCollect(boxPowers);
     }
 
-    public virtual void ShowDieMenu(){
+    public virtual void ShowPanelYouDie(){
         this.pnlYouDie.gameObject.SetActive(true);
     }
 
@@ -211,12 +223,12 @@ public class GameController : GameMonoBehaviour
         Time.timeScale = 0;
 
         int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
-        int coinTotal = EnemySpawner.Instance.CountSpawnPoint();
-        this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
-        this.pnlPassLevel.ShowPanel();
-
+        int coinTotal = EnemySpawner.Instance.CountSpawnPoint() * 10; //10 = point of each coin
+        coinTotal += EnemyGrenadeSpawner.Instance.CountSpawnPoint();
         int playerCoins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
         playerCoins += coins;
+        this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
+        this.pnlPassLevel.ShowPanel();
         PlayerPrefs.SetInt(Constant.SAVE_COINS, playerCoins);
 
         int boxGuns = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxGunCollect();

@@ -23,9 +23,9 @@ public class ItemShield : ShopItem
     protected override void LoadPlayerData(){
         this.level = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);
         Debug.Log("Shiled_Level_Save: " + this.level);
-        if(this.level <= 0) this.isSale = false;
-        else this.isSale = true;
-        Debug.Log("Is sale: " + this.isSale);
+        // if(this.level <= 0) this.isSale = false;
+        // else this.isSale = true;
+        // Debug.Log("Is sale: " + this.isSale);
     }
 
     protected override void InitData(){

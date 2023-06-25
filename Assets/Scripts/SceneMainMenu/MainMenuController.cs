@@ -20,6 +20,11 @@ public class MainMenuController : GameMonoBehaviour
         base.Awake();
         if(instance != null) return;
         instance = this;
+
+        
+        PlayerPrefs.SetInt(Constant.SAVE_COINS, 1000);
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, 1000);
+        PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, 1000);
     }
 
     protected override void LoadComponents(){

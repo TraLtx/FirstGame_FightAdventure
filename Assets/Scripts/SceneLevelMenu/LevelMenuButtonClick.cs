@@ -30,6 +30,10 @@ public class LevelMenuButtonClick : GameMonoBehaviour
         this.controller.GoToLevel(Constant.SCENE_LEVEL_1);
     }
 
+    public virtual void BtnLevelClick(int levelId){
+        this.controller.ChooseLevel(levelId);
+    }
+
     //---Player------------------------------
     public virtual void BtnChangeCharClick(){
         this.controller.ChangeChar();

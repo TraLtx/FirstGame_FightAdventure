@@ -29,12 +29,12 @@ public class ShootingLaser : Shooting
         this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
     }
     protected override void SetShootDelayMax(){
-        this.shootDelayMax = 5f;
+        this.shootDelayMax = 30f;
         this.shootDelay = this.shootDelayMax;
         this.shootTimer = this.shootDelay;
     }
     protected override void SetDelayUp(){
-        this.delayUp = 0.15f;
+        this.delayUp = 5f;
     }
     protected override void SetShootDelayMin(){
         this.shootDelayMin = 0.1f;
@@ -139,8 +139,16 @@ public class ShootingLaser : Shooting
 
         this.UpdateSlider();
 
+        this.LoadPlayerDataUlti_1();
+        this.shootDelay = this.shootDelayMax - this.shootPower * this.delayUp;
+
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);
         // this.shootDelay = 1f - this.shootPower * 0.15f;
+    }
+
+    protected virtual void LoadPlayerDataUlti_1(){
+        this.shootDam = PlayerPrefs.GetInt(Constant.SAVE_ULTI_1_LEVEL);
+        this.shootPower = this.shootDam;
     }
 }

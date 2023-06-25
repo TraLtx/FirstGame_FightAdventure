@@ -6,8 +6,10 @@ public abstract class Shield : GameMonoBehaviour
 {
     [SerializeField] protected Animator animator;
 
+    [SerializeField] protected int level;
     [SerializeField] protected int shieldPoint;
     [SerializeField] protected float shieldTime;
+
     [SerializeField] protected float shiledTimer;
     [SerializeField] protected int shieldStatus;
 
@@ -25,18 +27,24 @@ public abstract class Shield : GameMonoBehaviour
     }
 
     protected override void ResetValue(){
+        this.GetShieldLevel();
         this.SetShieldPoint();
         this.SetShieldTime();
         this.SetShieldStartStatus();
         this.SetDelayTime();
         this.SetUseAble();
     }
-    protected abstract void SetShieldPoint();
-    protected abstract void SetShieldTime();
+    protected abstract void GetShieldLevel();
     protected abstract void SetShieldStartStatus();
     protected abstract void SetDelayTime();
     protected abstract void SetUseAble();
     protected abstract bool GetShieldAble();
+    protected virtual void SetShieldPoint(){
+        this.shieldPoint = this.level;
+    }
+    protected virtual void SetShieldTime(){
+        this.shieldTime = this.level * 5;
+    }
 
     protected virtual void FixedUpdate(){
 

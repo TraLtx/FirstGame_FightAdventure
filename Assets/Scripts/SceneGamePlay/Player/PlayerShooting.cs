@@ -61,6 +61,7 @@ public class PlayerShooting : Shooting
         this.LoadPlayerDataPower();
         this.damBar.UpdateBar(this.shootDam);
         this.powerBar.UpdateBar(this.shootPower);
+        
         this.shootDelay = 1f - this.shootPower * 0.15f;
     }
 
@@ -71,7 +72,7 @@ public class PlayerShooting : Shooting
 
     protected virtual void LoadPlayerDataPower(){
         this.shootPower = PlayerPrefs.GetInt(Constant.SAVE_POWER_LEVEL);
-        if(this.shootPower < 1) this.shootDam = 1;
+        if(this.shootPower < 1) this.shootPower = 1;
     }
 
     public override void AddShootDam(int dam){

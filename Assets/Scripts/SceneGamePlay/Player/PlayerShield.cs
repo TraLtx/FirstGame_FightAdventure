@@ -20,12 +20,9 @@ public class PlayerShield : Shield
         this.lockSkill = transform.parent.Find("Canvas/ShieldTimer/Lock");
     }
 
-
-    protected override void SetShieldPoint(){
-        this.shieldPoint = 1;
-    }
-    protected override void SetShieldTime(){
-        this.shieldTime = 2f;
+    protected override void GetShieldLevel()
+    {
+        this.level = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL);
     }
     protected override void SetShieldStartStatus(){
         this.shieldStatus = 0;
@@ -35,7 +32,7 @@ public class PlayerShield : Shield
         this.delayTimer = this.delayTime;
     }
     protected override void SetUseAble(){
-        this.useAble = PlayerPrefs.GetInt(Constant.SAVE_SHIELD_LEVEL) > 0;
+        this.useAble = this.level > 0;
     }
     protected override bool GetShieldAble(){
         if(!GameController.Instance.IsOnlineState && this.useAble) return InputManager.Instance.GetShieldStatus();
@@ -64,4 +61,5 @@ public class PlayerShield : Shield
         this.UpdateSlider();
         
     }
+
 }
