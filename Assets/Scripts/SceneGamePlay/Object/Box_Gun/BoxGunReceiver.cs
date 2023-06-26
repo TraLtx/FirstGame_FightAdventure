@@ -11,8 +11,8 @@ public abstract class BoxGunReceiver : GameMonoBehaviour
         this.collectInventory = transform.parent.GetComponentInChildren<GunUpgradeInventory>();
     }
 
-    public virtual void AddGunUpgradePoint(int coinPoint){
-        this.currentPoint += coinPoint;
+    public virtual void AddGunUpgradePoint(int boxGun){
+        this.currentPoint += boxGun;
         this.collectInventory.UpdateInventory(this.currentPoint);
     }
 

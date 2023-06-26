@@ -10,6 +10,8 @@ public class GameController : GameMonoBehaviour
     protected static GameController instance;
     public static GameController Instance {get => instance;}
 
+    [SerializeField] protected AudioSource _audioSource;
+
     //---Game Object-------------------------------------------------------------
     [SerializeField] protected Camera camera;
     [SerializeField] protected Transform sceneChanger;
@@ -34,6 +36,10 @@ public class GameController : GameMonoBehaviour
 
     //---Variable--------------------------------------------------------------
 
+    //Set By Your Hand
+    [SerializeField] protected AudioClip dieClip;
+    [SerializeField] protected AudioClip passClip;
+    //-------------------------------------------
     [SerializeField] protected Transform thisPlayer;
     public Transform ThisPlayer => this.thisPlayer;
 
@@ -61,6 +67,7 @@ public class GameController : GameMonoBehaviour
 
     protected override void LoadComponents(){
         base.LoadComponents();
+        this.LoadAudioSource();
         this.LoadTileBackGround();
         this.LoadPnlYouDie();
         this.LoadPnlDie();
@@ -71,7 +78,10 @@ public class GameController : GameMonoBehaviour
         this.LoadCamera();
         this.LoadSceneChanger();
     }
-
+    protected virtual void LoadAudioSource(){
+        if(this._audioSource != null) return;
+        this._audioSource = GetComponent<AudioSource>();
+    }
     protected virtual void LoadTileBackGround(){
         if(this.tileBackGround != null) return;
         this.tileBackGround = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
@@ -126,6 +136,7 @@ public class GameController : GameMonoBehaviour
         this.SpawnEnemy();
         this.SpawnEnemyGrenade();
         this.SpawnObject();
+        this._audioSource.PlayDelayed(1f);
         // Physics2D.IgnoreCollision(this.playerPrefab.GetComponent<Collider2D>(), this.enemyPrefab.GetComponent<Collider2D>(), true);
     }
 
@@ -154,7 +165,6 @@ public class GameController : GameMonoBehaviour
         
         // thisPlayer.gameObject.SetActive(true);
 
-        
         camera.GetComponent<CameraFollowTarget>().SetTarget(thisPlayer);
     }
 
@@ -193,6 +203,10 @@ public class GameController : GameMonoBehaviour
         this.pnlDie.SetCoinsCollect(coins);
         this.pnlDie.SetBoxGunsCollect(boxGuns);
         this.pnlDie.SetBoxPowersCollect(boxPowers);
+
+        this._audioSource.clip = this.dieClip;
+        this._audioSource.volume = 1;
+        this._audioSource.Play();
     }
 
     public virtual void ShowPanelYouDie(){
@@ -224,24 +238,32 @@ public class GameController : GameMonoBehaviour
 
         int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
         int coinTotal = EnemySpawner.Instance.CountSpawnPoint() * 10; //10 = point of each coin
-        coinTotal += EnemyGrenadeSpawner.Instance.CountSpawnPoint();
+        coinTotal += EnemyGrenadeSpawner.Instance.CountSpawnPoint() * 10;
+        this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
         int playerCoins = PlayerPrefs.GetInt(Constant.SAVE_COINS);
         playerCoins += coins;
-        this.pnlPassLevel.SetCoinsTotal(coins, coinTotal);
-        this.pnlPassLevel.ShowPanel();
         PlayerPrefs.SetInt(Constant.SAVE_COINS, playerCoins);
 
         int boxGuns = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxGunCollect();
+        int boxGunTotal = BoxGunSpawner.Instance.CountSpawnPoint() * 10;
+        this.pnlPassLevel.SetBoxGunsTotal(boxGuns, boxGunTotal);
         int playerBoxGuns = PlayerPrefs.GetInt(Constant.SAVE_BOX_GUN);
         playerBoxGuns += boxGuns;
         PlayerPrefs.SetInt(Constant.SAVE_BOX_GUN, playerBoxGuns);
 
         int boxPowers = this.thisPlayer.GetComponent<PlayerCtrl>().GetBoxPowerCollect();
+        int boxPowerTotal = BoxPowerSpawner.Instance.CountSpawnPoint() * 10;
+        this.pnlPassLevel.SetBoxPowersTotal(boxPowers, boxPowerTotal);
         int playerBoxPowers = PlayerPrefs.GetInt(Constant.SAVE_BOX_POWER);
         playerBoxPowers += boxPowers;
         PlayerPrefs.SetInt(Constant.SAVE_BOX_POWER, playerBoxPowers);
 
         this.PlayParticle();
+        this.pnlPassLevel.ShowPanel();
+
+        this._audioSource.clip = this.passClip;
+        this._audioSource.volume = 1;
+        this._audioSource.Play();
     }
 
     protected virtual void PlayParticle(){

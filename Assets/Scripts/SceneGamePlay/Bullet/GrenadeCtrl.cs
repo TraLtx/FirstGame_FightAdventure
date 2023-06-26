@@ -72,6 +72,7 @@ public class GrenadeCtrl : GameMonoBehaviour
     // }
 
     public virtual void Boom(){Debug.Log("BOOOM!!");
+        SFXController.Instance.PlaySFX_Boom();
         Transform fx_impact = AnimationSpawner.Instance.Spawn(AnimationSpawner.grenadeBoom, transform.position, Quaternion.identity);
         fx_impact.gameObject.SetActive(true);
         this.scopeImpact.ActiveScope();

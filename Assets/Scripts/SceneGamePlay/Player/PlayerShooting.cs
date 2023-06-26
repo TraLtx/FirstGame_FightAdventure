@@ -8,6 +8,8 @@ public class PlayerShooting : Shooting
     [SerializeField] protected UIDamBar damBar;
     [SerializeField] protected UIPowerBar powerBar;
 
+    [SerializeField] protected AudioSource _audioSource;
+
     protected override void SetParentCtrl(){
         this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
     }
@@ -44,6 +46,7 @@ public class PlayerShooting : Shooting
         base.LoadComponents();
         this.LoadDamBar();
         this.LoadPowerBar();
+        this.LoadAudioSource();
     }
 
     protected virtual void LoadDamBar(){
@@ -55,6 +58,10 @@ public class PlayerShooting : Shooting
         if(this.powerBar != null) return;
         this.powerBar = transform.parent.GetComponentInChildren<UIPowerBar>();
     }
+    protected virtual void LoadAudioSource(){
+        if(this._audioSource != null) return;
+        this._audioSource = GetComponent<AudioSource>();
+    }
 
     protected virtual void Start(){
         this.LoadPlayerDataGun();
@@ -63,6 +70,11 @@ public class PlayerShooting : Shooting
         this.powerBar.UpdateBar(this.shootPower);
         
         this.shootDelay = 1f - this.shootPower * 0.15f;
+    }
+
+    protected override void Shoot(){
+        base.Shoot();
+        this.PlaySFX();
     }
 
     protected virtual void LoadPlayerDataGun(){
@@ -91,5 +103,7 @@ public class PlayerShooting : Shooting
         this.useAble = true;
     }
 
-    
+    protected virtual void PlaySFX(){Debug.Log("Tach*SFX");
+        this._audioSource.Play();
+    }
 }

@@ -11,8 +11,8 @@ public abstract class BoxPowerReceiver : GameMonoBehaviour
         this.collectInventory = transform.parent.GetComponentInChildren<PowerUpgradeInventory>();
     }
 
-    public virtual void AddPowerUpgradePoint(int coinPoint){
-        this.currentPoint += coinPoint;
+    public virtual void AddPowerUpgradePoint(int boxPower){
+        this.currentPoint += boxPower;
         this.collectInventory.UpdateInventory(this.currentPoint);
     }
 

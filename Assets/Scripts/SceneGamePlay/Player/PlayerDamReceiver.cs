@@ -10,17 +10,24 @@ public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
     [SerializeField] protected bool canHealBySelf = true;
     [SerializeField] protected int playerHeartBox;
 
+    [SerializeField] protected AudioSource _audioSource;
+
     [SerializeField] protected HeartInventory heartInventory;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadHeartInventory();
+        this.LoadAudioSource();
     }
 
     protected virtual void LoadHeartInventory(){
         if(this.heartInventory != null) return;
         this.heartInventory = transform.parent.GetComponentInChildren<HeartInventory>();
+    }
+    protected virtual void LoadAudioSource(){
+        if(this._audioSource != null) return;
+        this._audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Start(){
@@ -61,6 +68,10 @@ public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
         // Debug.Log(transform.parent.name);
         transform.parent.GetComponent<PlayerCtrl>().PlayerDangerEffect.NotifyDanger();
     }
+    public override void AddHp(int addNum){
+        base.AddHp(addNum);
+        this.PlaySFX();
+    }
     protected override void OnDead(){
         Destroy(transform.parent.gameObject);
         GameController.Instance.Die();
@@ -74,5 +85,9 @@ public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
     protected override void SetHp(){
         this.maxHp = 10;
         this.hp = maxHp;
+    }
+
+    protected virtual void PlaySFX(){
+        this._audioSource.Play();
     }
 }

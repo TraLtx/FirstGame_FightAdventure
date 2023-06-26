@@ -89,6 +89,7 @@ public class ShootingLaser : Shooting
     }
 
     protected virtual IEnumerator Shoot(){
+            SFXController.Instance.PlaySFX_PlayerLaser();
             //base.Shoot();
             this.shootTimer = 0;
             // if(transform.parent.localScale.x < 0){

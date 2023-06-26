@@ -44,7 +44,7 @@ public class PassLevelPanel : GameMonoBehaviour
         this.txtBoxGun.text = boxGun.ToString() + "/" + total.ToString();
     }
     public virtual void SetBoxPowersTotal(int boxPower, int total){
-        this.txtBoxGun.text = boxPower.ToString() + "/" + total.ToString();
+        this.txtBoxPower.text = boxPower.ToString() + "/" + total.ToString();
     }
 
     public virtual void ShowPanel(){

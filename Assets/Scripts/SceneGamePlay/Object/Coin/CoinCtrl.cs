@@ -11,6 +11,7 @@ public class CoinCtrl : GameMonoBehaviour
     [SerializeField] protected Collider2D _collider;
     public Collider2D _Collider => this._collider;
 
+
     //---Child--------------------------------------------------
     [SerializeField] protected CoinSender coinSender;
     public CoinSender CoinSender => this.coinSender;
