@@ -73,12 +73,7 @@ public abstract class Shooting : GameMonoBehaviour
         this.shootTimer = 0;
         // this.UpdateSlider();
 
-        // Vector3 modelScale = transform.parent.localScale;
 
-        // Quaternion rotation = new Quaternion(0,0,0,1);
-        // if(modelScale.x < 1){
-        //     rotation = new Quaternion(0,0,180,1);
-        // }
         Transform newBullet = BulletSpawner.Instance.Spawn(this.bulletName, this.shootingPoint.position, this.shootingPoint.parent.rotation);
         if(newBullet == null){
             Debug.LogWarning("Can not Spawn Bullet");
@@ -89,8 +84,6 @@ public abstract class Shooting : GameMonoBehaviour
         newBullet.GetComponent<BulletCtrl>().SetDamage(this.shootDam);
         newBullet.GetComponent<BulletCtrl>().ResetBorn();
 
-        //DELETEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        //if(newBullet.GetComponent<GrenadeCtrl>() != null) newBullet.GetComponent<GrenadeCtrl>().ResetBorn();
     }
     public virtual void AddShootDam(int dam){
         this.shootDam += dam;

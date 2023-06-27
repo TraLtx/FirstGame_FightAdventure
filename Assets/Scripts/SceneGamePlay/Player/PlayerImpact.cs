@@ -10,7 +10,7 @@ public class PlayerImpact : GameMonoBehaviour
     [SerializeField] protected Rigidbody2D _rigidbody;
     public Rigidbody2D Rigidbody2D {get => this._rigidbody;}
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerImpact.LoadComponents()");
         base.LoadComponents();
         this.LoadCollider();
         this.LoadRigidbody();

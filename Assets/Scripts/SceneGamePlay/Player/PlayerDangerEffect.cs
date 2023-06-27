@@ -6,7 +6,7 @@ public class PlayerDangerEffect : GameMonoBehaviour
 {
     [SerializeField] protected Animator animator;
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerDangerEffect.LoadComponents()");
         base.LoadComponents();
         this.LoadAnimator();
     }

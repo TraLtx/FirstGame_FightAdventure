@@ -36,6 +36,7 @@ public class GameController : GameMonoBehaviour
 
     //---Variable--------------------------------------------------------------
 
+    [SerializeField] protected int playingLevel;
     //Set By Your Hand
     [SerializeField] protected AudioClip dieClip;
     [SerializeField] protected AudioClip passClip;
@@ -65,7 +66,7 @@ public class GameController : GameMonoBehaviour
         return PhotonNetwork.IsConnected;
     }
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("Gamecontroller.LoadComponents()");
         base.LoadComponents();
         this.LoadAudioSource();
         this.LoadTileBackGround();
@@ -131,7 +132,8 @@ public class GameController : GameMonoBehaviour
         this.sceneChanger = GameObject.Find("SceneChanger").transform;
     }
     
-    protected virtual void Start(){
+    protected virtual void Start(){Debug.Log("Gamecontroller.Start()");
+        this.SetPlayingLevel();
         this.SpawnThisPlayer();
         this.SpawnEnemy();
         this.SpawnEnemyGrenade();
@@ -141,11 +143,11 @@ public class GameController : GameMonoBehaviour
     }
 
 
-    public virtual Transform GetThisPlayer(){
-        return thisPlayer;
+    public virtual void SetPlayingLevel(){
+        this.playingLevel = PlayerPrefs.GetInt(Constant.PLAYING_LEVEL);
     }
 
-    protected virtual void SpawnThisPlayer(){
+    protected virtual void SpawnThisPlayer(){Debug.Log("Gamecontroller.SpawnThisPlayer()");
 
         // if(!isOnlineState){
         //     thisPlayer = this.SpawnPlayerOffline();
@@ -168,7 +170,7 @@ public class GameController : GameMonoBehaviour
         camera.GetComponent<CameraFollowTarget>().SetTarget(thisPlayer);
     }
 
-    protected virtual void SpawnEnemy(){
+    protected virtual void SpawnEnemy(){Debug.Log("Gamecontroller.SpawnEnemy()");
         EnemySpawner.Instance.SpawnEnemyAllPoints(); 
     }
     protected virtual void SpawnEnemyGrenade(){
@@ -233,8 +235,26 @@ public class GameController : GameMonoBehaviour
         this.sceneChanger.GetComponent<SceneChanger>().ChangeScene(Constant.SCENE_LEVEL_MENU);
     }
 
+    public virtual void NextLevel(){
+        Time.timeScale = 1;
+        int nextLevel = this.playingLevel + 1;
+        //NOT OFFICAL
+        if(nextLevel == 4){
+            this.GotoSceneLevelMenu();
+            return;
+        }
+        //---------------
+        PlayerPrefs.SetInt(Constant.PLAYING_LEVEL, nextLevel);
+
+        Debug.Log("NextLevel: "+nextLevel);
+
+        this.sceneChanger.GetComponent<SceneChanger>().ChangeScene("Level_"+nextLevel);
+    }
+
     public virtual void PassLevel(){
         Time.timeScale = 0;
+        
+        PlayerPrefs.SetInt(Constant.SAVE_UNLOCK_LEVEL, this.playingLevel + 1);
 
         int coins = this.thisPlayer.GetComponent<PlayerCtrl>().GetCoinCollect();
         int coinTotal = EnemySpawner.Instance.CountSpawnPoint() * 10; //10 = point of each coin
@@ -275,6 +295,7 @@ public class GameController : GameMonoBehaviour
         passLevelParticle.Play();
 
     }
+
 
     // protected virtual Transform SpawnPlayerOffline(){Debug.Log("SpawnPlayerOffline");
     //     return Instantiate(

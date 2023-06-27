@@ -11,6 +11,7 @@ public class LevelMenuController : GameMonoBehaviour
     [SerializeField] protected SceneChanger sceneChanger;
     [SerializeField] protected LevelMenuSwitchTab switchTab;
 
+    [SerializeField] protected List<Button> buttonLevels;
     [SerializeField] protected int coins;
     [SerializeField] protected Text txtCoins;
     [SerializeField] protected int boxGuns;
@@ -42,6 +43,8 @@ public class LevelMenuController : GameMonoBehaviour
     protected override void LoadComponents(){
         this.LoadSceneChanger();
         this.LoadSwitchTab();
+
+        this.LoadButtonLevels();
         this.LoadTxtCoins();
         this.LoadTxtBoxGuns();
         this.LoadTxtBoxPowers();
@@ -64,6 +67,16 @@ public class LevelMenuController : GameMonoBehaviour
     protected virtual void LoadSwitchTab(){
         if(this.switchTab != null) return;
         this.switchTab = GetComponentInChildren<LevelMenuSwitchTab>();
+    }
+
+    protected virtual void LoadButtonLevels(){
+        this.buttonLevels.Clear();
+        Transform levelContainer = transform.Find("Canvas/Pnl_PageContent/Levels/LevelContainer");
+        foreach(Transform buttonLevel in levelContainer){
+            this.buttonLevels.Add(buttonLevel.GetComponent<Button>());
+        }
+
+        PlayerPrefs.SetInt(Constant.TOTAL_LEVEL, this.buttonLevels.Count);
     }
 
     protected virtual void LoadTxtCoins(){
@@ -105,10 +118,23 @@ public class LevelMenuController : GameMonoBehaviour
     }
 
     protected virtual void Start(){
+        this.SetUpButtonLevels();
         this.UpdateTxtCoin();
         this.UpdateTxtBoxGun();
         this.UpdateTxtBoxPower();
         this.UpdateTxtAmountHeart();
+    }
+
+    protected virtual void SetUpButtonLevels(){
+        int unlockLevel = PlayerPrefs.GetInt(Constant.SAVE_UNLOCK_LEVEL, 1);
+        // Debug.Log("UnlockLevel: " + unlockLevel);
+
+        for(int i = 0; i < this.buttonLevels.Count; i++){
+            if(i >= unlockLevel){
+                buttonLevels[i].interactable = false;
+                // Debug.Log("LockButton: " + i);
+            }
+        }
     }
 
     protected virtual void UpdateTxtCoin(){
@@ -135,7 +161,8 @@ public class LevelMenuController : GameMonoBehaviour
     }
 
     public virtual void ChooseLevel(int levelId){
-        string levelName = "Level" + levelId;
+        PlayerPrefs.SetInt(Constant.PLAYING_LEVEL, levelId);
+        string levelName = "Level_" + levelId;
         this.GoToLevel(levelName);
     }
 

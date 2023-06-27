@@ -42,7 +42,7 @@ public class InforPanel : GameMonoBehaviour
     //     this.timer = 0;
     // }
 
-    public virtual void ShowPanel(string infor){
+    public virtual void ShowPanel(string infor){Debug.Log("ShowPanel()");
         this.txtInfor.text = infor;
         // gameObject.SetActive(true); no here
         // this.StartTimer();

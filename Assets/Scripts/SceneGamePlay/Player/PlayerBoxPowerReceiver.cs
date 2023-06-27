@@ -7,7 +7,7 @@ public class PlayerBoxPowerReceiver : BoxPowerReceiver
     [SerializeField] protected AudioSource _audioSource;
 
     protected override void LoadComponents()
-    {
+    {Debug.Log("PlayerBoxPowerReceiver.LoadComponents()");
         base.LoadComponents();
         this.LoadAudioSource();
     }

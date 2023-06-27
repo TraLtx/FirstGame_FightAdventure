@@ -27,7 +27,7 @@ public class LevelMenuButtonClick : GameMonoBehaviour
     }
 
     public virtual void BtnLevel_1Click(){
-        this.controller.GoToLevel(Constant.SCENE_LEVEL_1);
+        this.controller.GoToLevel(Constant.SCENE_LEVEL_DEMO);
     }
 
     public virtual void BtnLevelClick(int levelId){

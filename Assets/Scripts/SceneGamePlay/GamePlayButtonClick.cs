@@ -25,4 +25,8 @@ public class GamePlayButtonClick : GameMonoBehaviour
     public virtual void BtnLevelMenuClick(){
         this.controller.GotoSceneLevelMenu();
     }
+
+    public virtual void BtnNextLevelClick(){
+        this.controller.NextLevel();
+    }
 }

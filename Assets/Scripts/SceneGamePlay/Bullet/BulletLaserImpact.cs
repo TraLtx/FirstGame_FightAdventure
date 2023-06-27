@@ -9,7 +9,7 @@ public class BulletLaserImpact : BulletImpact
         this.LoadBulletCtrl();
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other){
+    protected override void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "NotPhysic" || other.tag == "Bullet" || bulletCtrl.Shooter == other.transform) return;
         if(other.tag == "Enemy") bulletCtrl.DamSender.Send(other.transform);
         else{
@@ -17,6 +17,5 @@ public class BulletLaserImpact : BulletImpact
             this.Despawn();
         }
 
-        // this.PlayAnimation();
     }
 }

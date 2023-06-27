@@ -10,7 +10,7 @@ public class PlayerInventory : GameMonoBehaviour
     
     [SerializeField] protected SpriteRenderer keyIconRenderer;
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerInventory.LoadComponents()");
         this.LoadKeyIconRenderer();
     }
 

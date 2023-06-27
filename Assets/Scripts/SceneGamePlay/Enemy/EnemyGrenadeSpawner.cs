@@ -9,7 +9,7 @@ public class EnemyGrenadeSpawner : SpawnerNormal
 
     public static string enemy = "Enemy_Grenade";
 
-    protected virtual void Awake(){Debug.Log("instance");
+    protected override void Awake(){Debug.Log("instance");
         base.Awake();
         if(instance != null) return;
         instance = this;

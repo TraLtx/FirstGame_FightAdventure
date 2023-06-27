@@ -9,7 +9,7 @@ public class PlayerShield : Shield
 
     [SerializeField] protected Transform lockSkill;
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerShield.LoadComponents()");
         base.LoadComponents();
         this.LoadIconLock();
         this.LoadSlider();
@@ -51,14 +51,16 @@ public class PlayerShield : Shield
         this.circleSlider = transform.parent.Find("Canvas/ShieldTimer").GetComponent<UICircleSlider>();
     }
 
-    protected virtual void Start(){Debug.Log("PlayerShield.Start");
+    protected virtual void Start(){Debug.Log("PlayerShield.Start()");
         if(!this.useAble){
             this.delayTimer = 0;
             this.lockSkill.gameObject.SetActive(true);
-            return;
-        }this.lockSkill.gameObject.SetActive(false);
-
-        this.UpdateSlider();
+        }else{
+            this.lockSkill.gameObject.SetActive(false);
+            this.UpdateSlider();
+        
+            Debug.Log("PlayerShield.Start()---End");
+        }
         
     }
 

@@ -135,13 +135,13 @@ public class ShootingLaser : Shooting
         if(!this.useAble){
             this.shootTimer = 0;
             this.lockSkill.gameObject.SetActive(true);
-            return;
-        }this.lockSkill.gameObject.SetActive(false);
-
-        this.UpdateSlider();
-
-        this.LoadPlayerDataUlti_1();
-        this.shootDelay = this.shootDelayMax - this.shootPower * this.delayUp;
+            
+        }else{
+            this.lockSkill.gameObject.SetActive(false);
+            this.UpdateSlider();
+            this.LoadPlayerDataUlti_1();
+            this.shootDelay = this.shootDelayMax - this.shootPower * this.delayUp;
+        }
 
         // this.damBar.UpdateBar(this.shootDam);
         // this.powerBar.UpdateBar(this.shootPower);

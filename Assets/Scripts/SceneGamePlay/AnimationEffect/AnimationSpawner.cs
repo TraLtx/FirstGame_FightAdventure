@@ -7,7 +7,7 @@ public class AnimationSpawner : SpawnerWithPool
     private static AnimationSpawner instance;
     public static AnimationSpawner Instance {get => instance;}
 
-    protected override void Awake(){
+    protected override void Awake(){Debug.Log("AnimationSpawner.Awake()");
         base.Awake();
         if(instance != null) return;
         instance = this;

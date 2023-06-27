@@ -41,7 +41,7 @@ public class PlayerCtrl : GameMonoBehaviour
     [SerializeField] protected PlayerBoxPowerReceiver boxPowerReceiver;
     [SerializeField] protected PlayerShield shield;
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerCtrl.LoadComponents()");
         base.LoadComponents();
         this.LoadSpriteRenderer();
         this.LoadRigidbody();

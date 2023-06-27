@@ -7,7 +7,7 @@ public class PlayerBoxGunReceiver : BoxGunReceiver
     [SerializeField] protected AudioSource _audioSource;
 
     protected override void LoadComponents()
-    {
+    {Debug.Log("PlayerBoxGunReceiver.LoadComponents()");
         base.LoadComponents();
         this.LoadAudioSource();
     }

@@ -7,7 +7,7 @@ public class PlayerCoinReceiver : CoinReceiver
     [SerializeField] protected AudioSource _audioSource;
 
     protected override void LoadComponents()
-    {
+    {Debug.Log("PlayerCoinReceiver.LoadComponents()");
         base.LoadComponents();
         this.LoadAudioSource();
     }

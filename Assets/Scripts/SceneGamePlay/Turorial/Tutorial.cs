@@ -7,7 +7,7 @@ public abstract class Tutorial : GameMonoBehaviour
 {
     [SerializeField] protected Collider2D _collider;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected InforPanel pnlInfor;
+    [SerializeField] protected Transform pnlInfor;
     [SerializeField] protected string tutorialContent;
     // [SerializeField] protected int showTime;
     [SerializeField] protected bool isDone;
@@ -35,25 +35,27 @@ public abstract class Tutorial : GameMonoBehaviour
 
     protected virtual void LoadPnlInfor(){
         if(this.pnlInfor != null) return;
-        this.pnlInfor = GameObject.Find("MainCanvas").transform.Find("Pnl_Infor").GetComponent<InforPanel>();
+        this.pnlInfor = GameObject.Find("MainCanvas").transform.Find("Pnl_Infor");
     }
 
     protected virtual void ShowTutorial(){//Debug.Log("ShowTutor");
         this.pnlInfor.gameObject.SetActive(true);
         // this.pnlInfor.GetComponent<InforPanel>().SetActiveTime(this.showTime);
-        this.pnlInfor.ShowPanel(this.tutorialContent);
+        Debug.Log("Show Tutorial!");
+        this.pnlInfor.GetComponent<InforPanel>().ShowPanel(this.tutorialContent);
 //
     }
 
     protected virtual void HideTutorial(){//Debug.Log("ShowTutor");
         // this.pnlInfor.gameObject.SetActive(true);
         // this.pnlInfor.GetComponent<InforPanel>().SetActiveTime(this.showTime);
-        this.pnlInfor.TurnOff();
+        this.pnlInfor.GetComponent<InforPanel>().TurnOff();
 //
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other){
         if(!(other.tag == "Player")) return;
+        Debug.Log("Tutorial Hit Player!");
         if(this.isDone == false){
             this.isDone = true;
             animator.SetBool("IsDone", this.isDone);

@@ -42,7 +42,7 @@ public class PlayerShooting : Shooting
         return InputManager.Instance.GetFightStatus() && playerCtrl.View.IsMine;
     }
 
-    protected override void LoadComponents(){
+    protected override void LoadComponents(){Debug.Log("PlayerShooting.LoadComponents()");
         base.LoadComponents();
         this.LoadDamBar();
         this.LoadPowerBar();

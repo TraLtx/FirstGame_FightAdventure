@@ -15,7 +15,7 @@ public class PlayerDamReceiver : DamReceiver//, IHpBarInterface
     [SerializeField] protected HeartInventory heartInventory;
 
     protected override void LoadComponents()
-    {
+    {Debug.Log("PlayerDamReceiver.LoadComponents()");
         base.LoadComponents();
         this.LoadHeartInventory();
         this.LoadAudioSource();

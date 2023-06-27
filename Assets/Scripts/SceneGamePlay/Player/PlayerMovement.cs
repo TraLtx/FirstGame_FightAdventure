@@ -17,12 +17,13 @@ public class PlayerMovement : PlayerAbstract
     [SerializeField] protected Vector2 minMoveRange;
     [SerializeField] protected Vector2 maxMoveRange;
 
-    protected override void ResetValue(){
+    protected override void LoadComponents(){Debug.Log("PlayerMovement.LoadComponents()");
+        base.LoadComponents();
         this.SetRigidbodyTarget();
         this.SetLayerGround();
     }
     
-    protected virtual void SetRigidbodyTarget(){
+    protected virtual void SetRigidbodyTarget(){Debug.Log("PlayerMovement.SetRigidbodyTarget()");
         if(this.rb != null) return;
         this.rb = playerCtrl._Rigidbody;
     }
